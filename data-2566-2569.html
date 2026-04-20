@@ -1344,25 +1344,6 @@ body.dark-mode .result-section {
 				Google Drive
 			  </a>
         </div>
-    <section class="stats-section">
-        <h2 class="text-center">สถิติการใช้งาน</h2>
-        <div class="stats-container">
-            <div class="stat-card">
-                <i class="fas fa-users"></i>
-                <div class="stat-content">
-                    <span class="stat-number" id="visitorCount">0</span>
-                    <span class="stat-label">ผู้เข้าชม (เดือนนี้)</span>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-search"></i>
-                <div class="stat-content">
-                    <span class="stat-number" id="searchCount">0</span>
-                    <span class="stat-label">การค้นหา (เดือนนี้)</span>
-                </div>
-            </div>
-        </div>
-    </section>
     </div>	
 	
 
@@ -2275,68 +2256,6 @@ body.dark-mode .result-section {
 		  infoModal.style.display = "flex";
 		  document.body.classList.add("modal-open");
 		});
-
-
-		// ================== สถิติรายเดือน ==================
-		function getCurrentMonthKey() {
-			const now = new Date();
-			const month = (now.getMonth() + 1).toString().padStart(2, "0"); // 01-12
-			const year = now.getFullYear();
-			return `${year}-${month}`; // เช่น 2025-10
-		}
-
-		// โหลดข้อมูลสถิติจาก localStorage
-		let monthlyStats = JSON.parse(localStorage.getItem("monthlyStats")) || {};
-		let currentKey = getCurrentMonthKey();
-
-		// ถ้าเดือนนี้ยังไม่มีข้อมูล ให้เริ่มใหม่
-		if (!monthlyStats[currentKey]) {
-			monthlyStats[currentKey] = { visitors: 0, searches: 0 };
-		}
-
-		// นับผู้เข้าชม (ครั้งแรกของเดือนนี้)
-		if (!localStorage.getItem("visited_" + currentKey)) {
-			monthlyStats[currentKey].visitors++;
-			localStorage.setItem("visited_" + currentKey, "true");
-		}
-
-		// ฟังก์ชันสำหรับอัปเดตตัวเลขบนหน้าเว็บ
-		function updateStatsDisplay() {
-			const visitorCountElement = document.getElementById("visitorCount");
-			const searchCountElement = document.getElementById("searchCount");
-
-			if (visitorCountElement) {
-				visitorCountElement.innerText = monthlyStats[currentKey].visitors.toLocaleString();
-			}
-			if (searchCountElement) {
-				searchCountElement.innerText = monthlyStats[currentKey].searches.toLocaleString();
-			}
-		}
-
-		// บันทึกสถิติและอัปเดตการแสดงผล
-		function saveAndDisplayStats() {
-			localStorage.setItem("monthlyStats", JSON.stringify(monthlyStats));
-			updateStatsDisplay();
-		}
-
-		// เมื่อหน้าเว็บโหลดเสร็จ ให้อัปเดตสถิติ
-		document.addEventListener("DOMContentLoaded", saveAndDisplayStats);
-
-		// เพิ่ม Event Listener เพื่ออัปเดตการนับการค้นหา
-		searchButton.addEventListener("click", () => {
-			// โหลดข้อมูลล่าสุดก่อนการอัปเดต
-			monthlyStats = JSON.parse(localStorage.getItem("monthlyStats")) || {};
-			currentKey = getCurrentMonthKey();
-			if (!monthlyStats[currentKey]) {
-				monthlyStats[currentKey] = { visitors: 0, searches: 0 };
-			}
-
-			monthlyStats[currentKey].searches++;
-			saveAndDisplayStats();
-		});
-
-
-
 
     </script>
 </body>
