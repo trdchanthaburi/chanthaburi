@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าแรก - ระบบข้อมูลที่ราชพัสดุ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #008000;
+            --dark-green: #004d00;
+            /* --- ใส่ชื่อไฟล์รูปภาพพื้นหลังของคุณที่นี่ --- */
+            --bg-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* ตั้งค่าพื้นหลัง */
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* เลเยอร์สีเขียวจางๆ ทับรูปพื้นหลังเพื่อให้ตัวอักษรเด่น */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 77, 0, 0.4); /* สีเขียวเข้มโปร่งแสง */
+            z-index: 0;
+        }
+
+        .menu-container {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.9); /* พื้นหลังขาวโปร่งแสง */
+            backdrop-filter: blur(10px); /* เอฟเฟกต์เบลอหลังกล่อง */
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 650px;
+            width: 90%;
+        }
+
+        .logo {
+            height: 110px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+        }
+
+        h1 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+
+        p.subtitle {
+            color: #444;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* แบ่งเป็น 2 ปุ่มซ้ายขวา */
+            gap: 20px;
+        }
+
+        .nav-card {
+            background-color: white;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            text-decoration: none;
+            padding: 30px 15px;
+            border-radius: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-card i {
+            font-size: 2.5rem;
+        }
+
+        .nav-card span {
+            font-weight: 600;
+        }
+
+        .nav-card:hover {
+            background-color: var(--primary-green);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,128,0,0.3);
+        }
+
+        /* สำหรับมือถือให้เรียงต่อกันลงมา */
+        @media (max-width: 500px) {
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="menu-container">
+    <img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" alt="Logo" class="logo">
+    <h1>ระบบสืบค้นราคาประเมินที่ราชพัสดุ</h1>
+    <h1>(กรณีที่ไม่มีเอกสารสิทธิ์)</h1>
+    <p class="subtitle">สำนักงานธนารักษ์พื้นที่จันทบุรี</p>
+    
+    <div class="button-grid">
+        <a href="การสืบค้นราคาประเมินที่ราชพัสดุ.html" class="nav-card">
+            <i class="fas fa-search-location"></i>
+            <span>สืบค้นราคาประเมิน</span>
+        </a>
+
+        <a href="หน้าข้อมูลอื่น.html" class="nav-card">
+            <i class="fas fa-info-circle"></i>
+            <span>ข้อมูลที่ราชพัสดุอื่นๆ</span>
+        </a>
+    </div>
+
+    <div style="margin-top: 30px; border-top: 1px solid #ddd; padding-top: 20px;">
+        <small style="color: #666;">&copy; 2026 สำนักงานธนารักษ์พื้นที่จันทบุรี</small>
+    </div>
+</div>
+
+</body>
+</html>
