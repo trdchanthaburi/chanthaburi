@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>หน้าแรก - ระบบข้อมูลที่ราชพัสดุ</title>
-    <meta name="description" content="ประเมินที่ราชพัสดุธนารักษ์พื้นที่จังหวัดจันทบุรี">
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
         :root {
             --primary-green: #008000;
-            --dark-green: #004d00;
             --bg-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
         }
 
@@ -32,42 +31,27 @@
             content: "";
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 77, 0, 0.4);
+            background: rgba(0, 77, 0, 0.45);
             z-index: 0;
         }
 
+        /* เมนูหลักกลางหน้าจอ */
         .menu-container {
             position: relative;
             z-index: 1;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            /* ปรับ Padding ให้ย่อลงเท่าเดิม (40px 30px) และกว้าง 650px */
             padding: 40px 30px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 650px;
+            max-width: 600px;
             width: 90%;
         }
 
-        .logo {
-            height: 110px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
-        }
-
-        h1 {
-            color: var(--primary-green);
-            font-size: 1.5rem;
-            margin: 5px 0;
-            line-height: 1.4;
-        }
-
-        p.subtitle {
-            color: #444;
-            margin-bottom: 30px;
-            font-size: 1rem;
-        }
+        .logo { height: 110px; margin-bottom: 15px; }
+        h1 { color: var(--primary-green); font-size: 1.5rem; margin: 5px 0; line-height: 1.4; }
+        p.subtitle { color: #444; margin-bottom: 30px; }
 
         .button-grid {
             display: grid;
@@ -80,76 +64,91 @@
             border: 2px solid var(--primary-green);
             color: var(--primary-green);
             text-decoration: none;
-            /* ปรับ Padding ปุ่มให้พอดี */
             padding: 25px 15px;
             border-radius: 18px;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            gap: 12px;
         }
 
-        .nav-card i {
-            font-size: 2.5rem;
+        .nav-card:hover {
+            background-color: var(--primary-green);
+            color: white;
+            transform: translateY(-5px);
         }
 
-        .nav-card span {
+        /* กล่องนับเลขที่มุมขวาล่าง */
+        .fixed-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            border: 1px solid var(--primary-green);
+        }
+
+        .counter-label {
+            display: block;
+            font-size: 11px;
+            color: #333;
+            margin-bottom: 5px;
             font-weight: 600;
         }
 
-        /* เอฟเฟกต์ตอนเม้าส์ชี้ */
-        .nav-card:hover {
-            background-color: var(--primary-green);
-            color: white !important;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,128,0,0.3);
-        }
-
-        .nav-card:hover span {
-            color: white;
-        }
-
-        .footer {
-            margin-top: 30px;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
+        .footer-copyright {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
 
         @media (max-width: 500px) {
-            .button-grid {
-                grid-template-columns: 1fr;
-            }
-            h1 { font-size: 1.2rem; }
-            .menu-container { padding: 30px 20px; }
+            .button-grid { grid-template-columns: 1fr; }
+            .fixed-counter { bottom: 10px; right: 10px; padding: 8px 10px; }
         }
     </style>
 </head>
 <body>
 
-<div class="menu-container">
-    <img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" alt="Logo" class="logo">
-    <h1>ระบบสืบค้นราคาประเมินที่ราชพัสดุ</h1>
-    <h1>(กรณีที่ไม่มีเอกสารสิทธิ์)</h1>
-    <p class="subtitle">สำนักงานธนารักษ์พื้นที่จันทบุรี</p>
-    
-    <div class="button-grid">
-        <a href="data-2566-2569.html" class="nav-card">
-            <i class="fas fa-search-location"></i>
-            <span>รอบบัญชี 2566-2569</span>
-        </a>
+    <div class="menu-container">
+        <img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" alt="Logo" class="logo">
+        <h1>ระบบสืบค้นราคาประเมินที่ราชพัสดุ</h1>
+        <h1>(กรณีที่ไม่มีเอกสารสิทธิ์)</h1>
+        <p class="subtitle">สำนักงานธนารักษ์พื้นที่จันทบุรี</p>
+        
+        <div class="button-grid">
+            <a href="data-2566-2569.html" class="nav-card">
+                <i class="fas fa-search-location fa-2x"></i>
+                <span>รอบบัญชี 2566-2569</span>
+            </a>
+            <a href="data-2570-2573.html" class="nav-card">
+                <i class="fas fa-map-marked-alt fa-2x"></i>
+                <span>รอบบัญชี 2570-2573</span>
+            </a>
+        </div>
 
-        <a href="data-2570-2573.html" class="nav-card">
-            <i class="fas fa-map-marked-alt"></i>
-            <span>รอบบัญชี 2570-2573</span>
-        </a>
+        <div class="footer-copyright">
+            &copy; 2026 สำนักงานธนารักษ์พื้นที่จันทบุรี
+        </div>
     </div>
 
-    <div class="footer">
-        <small style="color: #666;">&copy; 2026 สำนักงานธนารักษ์พื้นที่จันทบุรี</small>
+    <div class="fixed-counter">
+        <span class="counter-label"><i class="fas fa-eye"></i> VISITORS</span>
+        <div id="sfcy6h4xalq6tlejck6tlatbtrqe8dd1y51"></div>
+        <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=y6h4xalq6tlejck6tlatbtrqe8dd1y51&down=async" async></script>
+        <noscript>
+            <a href="https://www.freecounterstat.com" title="web hit counter">
+                <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=y6h4xalq6tlejck6tlatbtrqe8dd1y51" border="0" title="web hit counter" alt="web hit counter">
+            </a>
+        </noscript>
     </div>
-</div>
 
 </body>
 </html>
