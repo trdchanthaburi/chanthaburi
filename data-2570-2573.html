@@ -124,24 +124,45 @@
         /* ==================================== */
         /* 3. Header (ส่วนหัว)                 */
         /* ==================================== */
-        .header { /* Changed from 'header' to '.header' for class specificity */
-            background-color: var(--primary-green);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            width: 100%; /* Take full width of its parent (.container) */
-            border-radius: 8px; /* Match container border-radius */
-            margin-bottom: 30px; /* Space below header */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex; /* Use flexbox for vertical alignment */
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
-            justify-content: center; /* Center items vertically if space allows */
-            opacity: 0; /* Start off-screen above */
-            transform: translateY(-20px);
-            animation: fadeInSlideDownHeader 0.5s ease-out forwards; /* Custom animation */
-            position: relative; /* For positioning header-controls */
-        }
+		.header {
+			background: linear-gradient(135deg, #e8f5e9, #f1f8f4);
+			color: white;
+			padding: 20px;
+			text-align: center;
+			width: 100%;
+			border-radius: 8px;
+			margin-bottom: 30px;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			opacity: 0;
+			transform: translateY(-20px);
+			animation: fadeInSlideDownHeader 0.5s ease-out forwards;
+
+			position: relative;
+			overflow: hidden; /* สำคัญ */
+		}
+		
+		.header::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+
+			background: url('https://images.unsplash.com/photo-1524661135-423995f22d0b') center/cover;
+			
+			opacity: 0.15; /* ปรับความจางตรงนี้ */
+			
+			pointer-events: none;
+		}
+		
+		.header > * {
+			position: relative;
+			z-index: 1;
+		}
 
         @keyframes fadeInSlideDownHeader {
             from { opacity: 0; transform: translateY(-20px); }
@@ -1041,25 +1062,7 @@ body.dark-mode {
   color: var(--text-light);
 }
 
-/* =============================== */
-/* 2. Header                       */
-/* =============================== */
-.header {
-  background: linear-gradient(135deg, var(--primary-green), #22c55e);
-  padding: 25px;
-  text-align: center;
-  border-radius: 16px;
-  color: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-.header img {
-  height: 80px;
-  margin-bottom: 10px;
-}
-.header h1 {
-  margin: 4px 0;
-  font-weight: 700;
-}
+
 
 /* =============================== */
 /* 3. Form                         */
@@ -1356,6 +1359,7 @@ body.dark-mode .result-section {
 				Google Drive
 			  </a>
         </div>
+    
     </div>	
 	
 
@@ -2268,6 +2272,7 @@ body.dark-mode .result-section {
 		  infoModal.style.display = "flex";
 		  document.body.classList.add("modal-open");
 		});
+
 
     </script>
 </body>
