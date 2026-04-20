@@ -88,7 +88,7 @@
             font-family: 'Prompt', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--background-color);
+            background: url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e') center/cover no-repeat fixed !important;
             transition: background-color 0.3s ease, color 0.3s ease;
             min-height: 100vh;
             display: flex;
@@ -96,6 +96,18 @@
             align-items: center;
             /* Removed padding-top as header is no longer fixed */
         }
+		body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+			background: rgba(255,255,255,0.2); /* ปรับความสว่าง */
+			backdrop-filter: blur(3px);
+			z-index: -1;
+		}
+		
+		body.dark-mode::before {
+			background: rgba(0,0,0,0.6);
+		}
 
         .container {
             width: 90%;
