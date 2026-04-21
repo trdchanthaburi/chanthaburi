@@ -890,359 +890,152 @@
         }
 		
 		/* =============================== */
-/* 1. Global Theme Variables       */
-/* =============================== */
-:root {
-  /* Light Mode */
-  --primary-green: #0a8754;
-  --dark-green: #056047;
-  --light-bg: #f9fff9;
-  --border-color: #d6e9d6;
-  --shadow-color: rgba(0, 0, 0, 0.08);
-  --text-color: #222;
-  --background-color: #e9f7ef;
-  --container-bg: #ffffff;
-  --button-bg: var(--primary-green);
-  --button-text: #fff;
-  --table-header-bg: var(--dark-green);
-  --table-header-text: #fff;
-  --table-row-even-bg: #f5fdf7;
-  --table-row-odd-bg: #ffffff;
-  --link-color: var(--primary-green);
-  --link-hover-color: var(--dark-green);
-}
+		/* 1. Global Theme Variables       */
+		/* =============================== */
+		:root {
+		  /* Light Mode */
+		  --primary-green: #0a8754;
+		  --dark-green: #056047;
+		  --light-bg: #f9fff9;
+		  --border-color: #d6e9d6;
+		  --shadow-color: rgba(0, 0, 0, 0.08);
+		  --text-color: #222;
+		  --background-color: #e9f7ef;
+		  --container-bg: #ffffff;
+		  --button-bg: var(--primary-green);
+		  --button-text: #fff;
+		  --table-header-bg: var(--dark-green);
+		  --table-header-text: #fff;
+		  --table-row-even-bg: #f5fdf7;
+		  --table-row-odd-bg: #ffffff;
+		  --link-color: var(--primary-green);
+		  --link-hover-color: var(--dark-green);
+		}
 
-body.dark-mode {
-  /* Dark Mode */
-  --primary-green: #4caf6f;
-  --dark-green: #2e7d4f;
-  --light-bg: #2a2a2a;
-  --border-color: #444;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-  --text-color: #e6e6e6;
-  --background-color: #1d1d1d;
-  --container-bg: #2b2b2b;
-  --button-bg: var(--primary-green);
-  --button-text: #fff;
-  --table-header-bg: #333;
-  --table-header-text: #f0f0f0;
-  --table-row-even-bg: #2e2e2e;
-  --table-row-odd-bg: #242424;
-  --link-color: #7be495;
-  --link-hover-color: #9fffc7;
-}
+		body.dark-mode {
+		  /* Dark Mode */
+		  --primary-green: #4caf6f;
+		  --dark-green: #2e7d4f;
+		  --light-bg: #2a2a2a;
+		  --border-color: #444;
+		  --shadow-color: rgba(0, 0, 0, 0.5);
+		  --text-color: #e6e6e6;
+		  --background-color: #1d1d1d;
+		  --container-bg: #2b2b2b;
+		  --button-bg: var(--primary-green);
+		  --button-text: #fff;
+		  --table-header-bg: #333;
+		  --table-header-text: #f0f0f0;
+		  --table-row-even-bg: #2e2e2e;
+		  --table-row-odd-bg: #242424;
+		  --link-color: #7be495;
+		  --link-hover-color: #9fffc7;
+		}
+		
 
-/* =============================== */
-/* 2. Container & Header           */
-/* =============================== */
-.container {
-  border-radius: 16px;
-  padding: 35px;
-  box-shadow: 0 6px 20px var(--shadow-color);
-}
+		/* =============================== */
+		/* 2. Container & Header           */
+		/* =============================== */
+		.container {
+		  border-radius: 16px;
+		  padding: 35px;
+		  box-shadow: 0 6px 20px var(--shadow-color);
+		}
 
-.header {
-  border-radius: 14px;
-  padding: 25px;
-  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
+		.header {
+		  border-radius: 14px;
+		  padding: 25px;
+		  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+		  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+		}
 
-.header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-}
+		.header h1 {
+		  font-size: 2rem;
+		  font-weight: 700;
+		}
 
-/* =============================== */
-/* 3. Buttons                      */
-/* =============================== */
-button {
-  border-radius: 10px !important;
-  font-weight: 600;
-  transition: all 0.25s ease;
-}
+		/* =============================== */
+		/* 3. Buttons                      */
+		/* =============================== */
+		button {
+		  border-radius: 10px !important;
+		  font-weight: 600;
+		  transition: all 0.25s ease;
+		}
 
-.search-button {
-  background: var(--primary-green);
-}
-.search-button:hover {
-  background: var(--dark-green);
-  transform: translateY(-3px);
-}
+		.search-button {
+		  background: var(--primary-green);
+		}
+		.search-button:hover {
+		  background: var(--dark-green);
+		  transform: translateY(-3px);
+		}
 
-.clear-button {
-  background: #e74c3c;
-}
-.clear-button:hover {
-  background: #c0392b;
-  transform: translateY(-3px);
-}
+		.clear-button {
+		  background: #e74c3c;
+		}
+		.clear-button:hover {
+		  background: #c0392b;
+		  transform: translateY(-3px);
+		}
 
-/* Theme Toggle / Info */
-.theme-toggle, .info-button {
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(6px);
-}
-body.dark-mode .theme-toggle, body.dark-mode .info-button {
-  background: rgba(0,0,0,0.25);
-}
+		/* Theme Toggle / Info */
+		.theme-toggle, .info-button {
+		  border-radius: 50%;
+		  background: rgba(255,255,255,0.15);
+		  backdrop-filter: blur(6px);
+		}
+		body.dark-mode .theme-toggle, body.dark-mode .info-button {
+		  background: rgba(0,0,0,0.25);
+		}
 
-/* =============================== */
-/* 4. Inputs                       */
-/* =============================== */
-input[type="text"], select {
-  border-radius: 10px;
-  padding: 12px 16px;
-  transition: box-shadow 0.3s;
-}
-input:focus, select:focus {
-  box-shadow: 0 0 0 4px rgba(10, 135, 84, 0.25);
-}
+		/* =============================== */
+		/* 4. Inputs                       */
+		/* =============================== */
+		input[type="text"], select {
+		  border-radius: 10px;
+		  padding: 12px 16px;
+		  transition: box-shadow 0.3s;
+		}
+		input:focus, select:focus {
+		  box-shadow: 0 0 0 4px rgba(10, 135, 84, 0.25);
+		}
 
-/* =============================== */
-/* 5. Results Table                */
-/* =============================== */
-.result-table {
-  border-radius: 12px;
-  overflow: hidden;
-}
-.result-table th {
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.result-table tr:hover {
-  background: rgba(10, 135, 84, 0.08);
-  transform: scale(1.01);
-}
+		/* =============================== */
+		/* 5. Results Table                */
+		/* =============================== */
+		.result-table {
+		  border-radius: 12px;
+		  overflow: hidden;
+		}
+		.result-table th {
+		  text-transform: uppercase;
+		  letter-spacing: 0.5px;
+		}
+		.result-table tr:hover {
+		  background: rgba(10, 135, 84, 0.08);
+		  transform: scale(1.01);
+		}
 
-/* =============================== */
-/* 6. Modal                        */
-/* =============================== */
-.modal-content {
-  border-radius: 14px;
-  animation: scaleFadeIn 0.35s ease-out;
-}
-@keyframes scaleFadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
-}
+		/* =============================== */
+		/* 6. Modal                        */
+		/* =============================== */
+		.modal-content {
+		  border-radius: 14px;
+		  animation: scaleFadeIn 0.35s ease-out;
+		}
+		@keyframes scaleFadeIn {
+		  from { opacity: 0; transform: scale(0.9); }
+		  to   { opacity: 1; transform: scale(1); }
+		}
 
-/* =============================== */
-/* 7. Scroll to Top                */
-/* =============================== */
-#scrollToTopBtn {
-  border-radius: 50%;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-}
-/* =============================== */
-/* 1. Theme Variables              */
-/* =============================== */
-:root {
-  --primary-green: #16a34a;
-  --dark-green: #0f5132;
-  --bg-light: #f9fafb;
-  --text-dark: #1f2937;
-  --text-light: #f9fafb;
-  --card-light: #ffffff;
-  --card-dark: #1e1e1e;
-  --border-light: #e5e7eb;
-  --border-dark: #444;
-}
-
-body {
-  font-family: 'Prompt', sans-serif;
-  background: var(--bg-light);
-  color: var(--text-dark);
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-body.dark-mode {
-  background: #111827;
-  color: var(--text-light);
-}
-
-
-
-/* =============================== */
-/* 3. Form                         */
-/* =============================== */
-.search-form {
-  background: var(--card-light);
-  border: 1px solid var(--border-light);
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 30px;
-}
-body.dark-mode .search-form {
-  background: var(--card-dark);
-  border: 1px solid var(--border-dark);
-}
-.form-group input, .form-group select {
-  border: 1px solid var(--border-light);
-  border-radius: 10px;
-  padding: 12px;
-  transition: 0.3s;
-}
-.form-group input:focus, .form-group select:focus {
-  outline: none;
-  border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(34,197,94,0.3);
-}
-
-/* =============================== */
-/* 4. Buttons                      */
-/* =============================== */
-button {
-  border-radius: 10px;
-  font-weight: 600;
-  padding: 12px 18px;
-  cursor: pointer;
-  transition: 0.25s;
-}
-.search-button {
-  background: var(--primary-green);
-  color: white;
-}
-.search-button:hover {
-  background: var(--dark-green);
-  transform: translateY(-2px);
-}
-.clear-button {
-  background: #ef4444;
-  color: white;
-}
-.clear-button:hover {
-  background: #b91c1c;
-  transform: translateY(-2px);
-}
-
-/* =============================== */
-/* 5. Results Table                */
-/* =============================== */
-.result-section {
-  background: var(--card-light);
-  border: 1px solid var(--border-light);
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-body.dark-mode .result-section {
-  background: var(--card-dark);
-  border: 1px solid var(--border-dark);
-}
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.result-table th {
-  background: var(--primary-green);
-  color: white;
-  padding: 12px;
-}
-.result-table td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border-light);
-}
-.result-table tr:hover {
-  background: rgba(22,163,74,0.08);
-}
-
-/* =============================== */
-/* 6. Modal                        */
-/* =============================== */
-.modal-content {
-  border-radius: 16px;
-  animation: scaleFadeIn 0.3s ease;
-}
-@keyframes scaleFadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-/* =============================== */
-/* 7. Scroll To Top                */
-/* =============================== */
-#scrollToTopBtn {
-  border-radius: 50%;
-  background: var(--primary-green);
-  color: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-#scrollToTopBtn:hover {
-  background: var(--dark-green);
-}
-
-/* ==================================== */
-/* 12. Statistics Section (ส่วนสถิติ)   */
-/* ==================================== */
-.stats-section {
-    margin-top: 30px;
-    padding: 25px;
-    background-color: var(--light-cream);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: inset 0 1px 5px var(--shadow-color);
-    text-align: center;
-    transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInSlideUp 0.6s ease-out forwards;
-    animation-delay: 0.5s;
-}
-
-.stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.stat-card {
-    background-color: var(--container-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 20px;
-    width: 250px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 2px 10px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px var(--shadow-color);
-}
-
-.stat-card i {
-    font-size: 2.5em;
-    color: var(--primary-green);
-}
-
-.stat-content {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-.stat-number {
-    font-size: 2em;
-    font-weight: 700;
-    color: var(--dark-green);
-    line-height: 1;
-}
-
-.stat-label {
-    font-size: 0.9em;
-    font-weight: 400;
-    color: var(--text-color);
-}
-
-
+		/* =============================== */
+		/* 7. Scroll to Top                */
+		/* =============================== */
+		#scrollToTopBtn {
+		  border-radius: 50%;
+		  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+		}
 
     </style>
 </head>
@@ -1322,17 +1115,24 @@ body.dark-mode .result-section {
             </section>
         </main>
     </div> 
-			<footer style="padding: 30px; text-align: center; background-color: #f9f9f9; font-size: 12px;">
-			  <span style="display: inline-flex; align-items: center; gap: 8px;">
-				<img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" 
-					 alt="โลโก้กรมธนารักษ์" 
-					 style="width: 80px; height: auto;">
-				<span>
-				   
-				  <h2>กรมธนารักษ์จันทบุรี. สงวนลิขสิทธิ์.</h2>
-				</span>
-			  </span>
-			</footer>
+				<footer style="padding: 25px 20px; background-color: #f0f7f4; border-top: 1px solid #b7e4c7; margin-top: 50px; font-family: 'Sarabun', sans-serif;">
+				  <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 20px;">
+					
+					<img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" 
+						 alt="โลโก้กรมธนารักษ์" 
+						 style="width: 65px; height: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+					
+					<div style="color: #2d6a4f; text-align: center;">
+					  <h2 style="margin: 0; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.5px; line-height: 1.4;">
+						สำนักงานธนารักษ์พื้นที่จันทบุรี
+					  </h2>
+					  <p style="margin: 2px 0 0; font-size: 0.85rem; opacity: 0.8;">
+						© สงวนลิขสิทธิ์ กรมธนารักษ์
+					  </p>
+					</div>
+
+				  </div>
+				</footer>
 
     <button id="scrollToTopBtn" title="กลับขึ้นบน" aria-label="เลื่อนกลับไปด้านบนสุดของหน้า">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
@@ -1498,7 +1298,7 @@ body.dark-mode .result-section {
 			{
                 doc_number: 97,
                 province: 'จันทบุรี',
-                district: 'ขลุง',
+                district: 'อำเภอขลุง',
                 location: 'กระโจมไฟเกาะจิก กรมอุทกศาสตร์ ทร',
                 document_link: 'https://drive.google.com/file/d/1QrOID0h-KP0E57vsM0gfonqNqOcNllaV/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=164zU7Tq_o3pXXuimItLoUpP0PPO--lg&usp=sharing'
