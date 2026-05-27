@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="google-site-verification" content="SghRc2vc080TaM2lymepxR3xfwlxapeBpJSwht8pHog" />
     <title>ระบบสืบค้นข้อมูลที่ราชพัสดุ จันทบุรี</title>
-	<meta name="description" content="ประเมินที่ราชพัสดุธนารักษ์พื้นที่จังหวัดจันทบุรี">
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -124,24 +123,45 @@
         /* ==================================== */
         /* 3. Header (ส่วนหัว)                 */
         /* ==================================== */
-        .header { /* Changed from 'header' to '.header' for class specificity */
-            background-color: var(--primary-green);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            width: 100%; /* Take full width of its parent (.container) */
-            border-radius: 8px; /* Match container border-radius */
-            margin-bottom: 30px; /* Space below header */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex; /* Use flexbox for vertical alignment */
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
-            justify-content: center; /* Center items vertically if space allows */
-            opacity: 0; /* Start off-screen above */
-            transform: translateY(-20px);
-            animation: fadeInSlideDownHeader 0.5s ease-out forwards; /* Custom animation */
-            position: relative; /* For positioning header-controls */
-        }
+		.header {
+			background: linear-gradient(135deg, #e8f5e9, #f1f8f4);
+			color: white;
+			padding: 20px;
+			text-align: center;
+			width: 100%;
+			border-radius: 8px;
+			margin-bottom: 30px;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			opacity: 0;
+			transform: translateY(-20px);
+			animation: fadeInSlideDownHeader 0.5s ease-out forwards;
+
+			position: relative;
+			overflow: hidden; /* สำคัญ */
+		}
+		
+		.header::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+
+			background: url('https://images.unsplash.com/photo-1524661135-423995f22d0b') center/cover;
+			
+			opacity: 0.15; /* ปรับความจางตรงนี้ */
+			
+			pointer-events: none;
+		}
+		
+		.header > * {
+			position: relative;
+			z-index: 1;
+		}
 
         @keyframes fadeInSlideDownHeader {
             from { opacity: 0; transform: translateY(-20px); }
@@ -869,377 +889,152 @@
         }
 		
 		/* =============================== */
-/* 1. Global Theme Variables       */
-/* =============================== */
-:root {
-  /* Light Mode */
-  --primary-green: #0a8754;
-  --dark-green: #056047;
-  --light-bg: #f9fff9;
-  --border-color: #d6e9d6;
-  --shadow-color: rgba(0, 0, 0, 0.08);
-  --text-color: #222;
-  --background-color: #e9f7ef;
-  --container-bg: #ffffff;
-  --button-bg: var(--primary-green);
-  --button-text: #fff;
-  --table-header-bg: var(--dark-green);
-  --table-header-text: #fff;
-  --table-row-even-bg: #f5fdf7;
-  --table-row-odd-bg: #ffffff;
-  --link-color: var(--primary-green);
-  --link-hover-color: var(--dark-green);
-}
+		/* 1. Global Theme Variables       */
+		/* =============================== */
+		:root {
+		  /* Light Mode */
+		  --primary-green: #0a8754;
+		  --dark-green: #056047;
+		  --light-bg: #f9fff9;
+		  --border-color: #d6e9d6;
+		  --shadow-color: rgba(0, 0, 0, 0.08);
+		  --text-color: #222;
+		  --background-color: #e9f7ef;
+		  --container-bg: #ffffff;
+		  --button-bg: var(--primary-green);
+		  --button-text: #fff;
+		  --table-header-bg: var(--dark-green);
+		  --table-header-text: #fff;
+		  --table-row-even-bg: #f5fdf7;
+		  --table-row-odd-bg: #ffffff;
+		  --link-color: var(--primary-green);
+		  --link-hover-color: var(--dark-green);
+		}
 
-body.dark-mode {
-  /* Dark Mode */
-  --primary-green: #4caf6f;
-  --dark-green: #2e7d4f;
-  --light-bg: #2a2a2a;
-  --border-color: #444;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-  --text-color: #e6e6e6;
-  --background-color: #1d1d1d;
-  --container-bg: #2b2b2b;
-  --button-bg: var(--primary-green);
-  --button-text: #fff;
-  --table-header-bg: #333;
-  --table-header-text: #f0f0f0;
-  --table-row-even-bg: #2e2e2e;
-  --table-row-odd-bg: #242424;
-  --link-color: #7be495;
-  --link-hover-color: #9fffc7;
-}
+		body.dark-mode {
+		  /* Dark Mode */
+		  --primary-green: #4caf6f;
+		  --dark-green: #2e7d4f;
+		  --light-bg: #2a2a2a;
+		  --border-color: #444;
+		  --shadow-color: rgba(0, 0, 0, 0.5);
+		  --text-color: #e6e6e6;
+		  --background-color: #1d1d1d;
+		  --container-bg: #2b2b2b;
+		  --button-bg: var(--primary-green);
+		  --button-text: #fff;
+		  --table-header-bg: #333;
+		  --table-header-text: #f0f0f0;
+		  --table-row-even-bg: #2e2e2e;
+		  --table-row-odd-bg: #242424;
+		  --link-color: #7be495;
+		  --link-hover-color: #9fffc7;
+		}
+		
 
-/* =============================== */
-/* 2. Container & Header           */
-/* =============================== */
-.container {
-  border-radius: 16px;
-  padding: 35px;
-  box-shadow: 0 6px 20px var(--shadow-color);
-}
+		/* =============================== */
+		/* 2. Container & Header           */
+		/* =============================== */
+		.container {
+		  border-radius: 16px;
+		  padding: 35px;
+		  box-shadow: 0 6px 20px var(--shadow-color);
+		}
 
-.header {
-  border-radius: 14px;
-  padding: 25px;
-  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
+		.header {
+		  border-radius: 14px;
+		  padding: 25px;
+		  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+		  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+		}
 
-.header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-}
+		.header h1 {
+		  font-size: 2rem;
+		  font-weight: 700;
+		}
 
-/* =============================== */
-/* 3. Buttons                      */
-/* =============================== */
-button {
-  border-radius: 10px !important;
-  font-weight: 600;
-  transition: all 0.25s ease;
-}
+		/* =============================== */
+		/* 3. Buttons                      */
+		/* =============================== */
+		button {
+		  border-radius: 10px !important;
+		  font-weight: 600;
+		  transition: all 0.25s ease;
+		}
 
-.search-button {
-  background: var(--primary-green);
-}
-.search-button:hover {
-  background: var(--dark-green);
-  transform: translateY(-3px);
-}
+		.search-button {
+		  background: var(--primary-green);
+		}
+		.search-button:hover {
+		  background: var(--dark-green);
+		  transform: translateY(-3px);
+		}
 
-.clear-button {
-  background: #e74c3c;
-}
-.clear-button:hover {
-  background: #c0392b;
-  transform: translateY(-3px);
-}
+		.clear-button {
+		  background: #e74c3c;
+		}
+		.clear-button:hover {
+		  background: #c0392b;
+		  transform: translateY(-3px);
+		}
 
-/* Theme Toggle / Info */
-.theme-toggle, .info-button {
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(6px);
-}
-body.dark-mode .theme-toggle, body.dark-mode .info-button {
-  background: rgba(0,0,0,0.25);
-}
+		/* Theme Toggle / Info */
+		.theme-toggle, .info-button {
+		  border-radius: 50%;
+		  background: rgba(255,255,255,0.15);
+		  backdrop-filter: blur(6px);
+		}
+		body.dark-mode .theme-toggle, body.dark-mode .info-button {
+		  background: rgba(0,0,0,0.25);
+		}
 
-/* =============================== */
-/* 4. Inputs                       */
-/* =============================== */
-input[type="text"], select {
-  border-radius: 10px;
-  padding: 12px 16px;
-  transition: box-shadow 0.3s;
-}
-input:focus, select:focus {
-  box-shadow: 0 0 0 4px rgba(10, 135, 84, 0.25);
-}
+		/* =============================== */
+		/* 4. Inputs                       */
+		/* =============================== */
+		input[type="text"], select {
+		  border-radius: 10px;
+		  padding: 12px 16px;
+		  transition: box-shadow 0.3s;
+		}
+		input:focus, select:focus {
+		  box-shadow: 0 0 0 4px rgba(10, 135, 84, 0.25);
+		}
 
-/* =============================== */
-/* 5. Results Table                */
-/* =============================== */
-.result-table {
-  border-radius: 12px;
-  overflow: hidden;
-}
-.result-table th {
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.result-table tr:hover {
-  background: rgba(10, 135, 84, 0.08);
-  transform: scale(1.01);
-}
+		/* =============================== */
+		/* 5. Results Table                */
+		/* =============================== */
+		.result-table {
+		  border-radius: 12px;
+		  overflow: hidden;
+		}
+		.result-table th {
+		  text-transform: uppercase;
+		  letter-spacing: 0.5px;
+		}
+		.result-table tr:hover {
+		  background: rgba(10, 135, 84, 0.08);
+		  transform: scale(1.01);
+		}
 
-/* =============================== */
-/* 6. Modal                        */
-/* =============================== */
-.modal-content {
-  border-radius: 14px;
-  animation: scaleFadeIn 0.35s ease-out;
-}
-@keyframes scaleFadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
-}
+		/* =============================== */
+		/* 6. Modal                        */
+		/* =============================== */
+		.modal-content {
+		  border-radius: 14px;
+		  animation: scaleFadeIn 0.35s ease-out;
+		}
+		@keyframes scaleFadeIn {
+		  from { opacity: 0; transform: scale(0.9); }
+		  to   { opacity: 1; transform: scale(1); }
+		}
 
-/* =============================== */
-/* 7. Scroll to Top                */
-/* =============================== */
-#scrollToTopBtn {
-  border-radius: 50%;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-}
-/* =============================== */
-/* 1. Theme Variables              */
-/* =============================== */
-:root {
-  --primary-green: #16a34a;
-  --dark-green: #0f5132;
-  --bg-light: #f9fafb;
-  --text-dark: #1f2937;
-  --text-light: #f9fafb;
-  --card-light: #ffffff;
-  --card-dark: #1e1e1e;
-  --border-light: #e5e7eb;
-  --border-dark: #444;
-}
-
-body {
-  font-family: 'Prompt', sans-serif;
-  background: var(--bg-light);
-  color: var(--text-dark);
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-body.dark-mode {
-  background: #111827;
-  color: var(--text-light);
-}
-
-/* =============================== */
-/* 2. Header                       */
-/* =============================== */
-.header {
-  background: linear-gradient(135deg, var(--primary-green), #22c55e);
-  padding: 25px;
-  text-align: center;
-  border-radius: 16px;
-  color: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-.header img {
-  height: 80px;
-  margin-bottom: 10px;
-}
-.header h1 {
-  margin: 4px 0;
-  font-weight: 700;
-}
-
-/* =============================== */
-/* 3. Form                         */
-/* =============================== */
-.search-form {
-  background: var(--card-light);
-  border: 1px solid var(--border-light);
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 30px;
-}
-body.dark-mode .search-form {
-  background: var(--card-dark);
-  border: 1px solid var(--border-dark);
-}
-.form-group input, .form-group select {
-  border: 1px solid var(--border-light);
-  border-radius: 10px;
-  padding: 12px;
-  transition: 0.3s;
-}
-.form-group input:focus, .form-group select:focus {
-  outline: none;
-  border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(34,197,94,0.3);
-}
-
-/* =============================== */
-/* 4. Buttons                      */
-/* =============================== */
-button {
-  border-radius: 10px;
-  font-weight: 600;
-  padding: 12px 18px;
-  cursor: pointer;
-  transition: 0.25s;
-}
-.search-button {
-  background: var(--primary-green);
-  color: white;
-}
-.search-button:hover {
-  background: var(--dark-green);
-  transform: translateY(-2px);
-}
-.clear-button {
-  background: #ef4444;
-  color: white;
-}
-.clear-button:hover {
-  background: #b91c1c;
-  transform: translateY(-2px);
-}
-
-/* =============================== */
-/* 5. Results Table                */
-/* =============================== */
-.result-section {
-  background: var(--card-light);
-  border: 1px solid var(--border-light);
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-body.dark-mode .result-section {
-  background: var(--card-dark);
-  border: 1px solid var(--border-dark);
-}
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.result-table th {
-  background: var(--primary-green);
-  color: white;
-  padding: 12px;
-}
-.result-table td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border-light);
-}
-.result-table tr:hover {
-  background: rgba(22,163,74,0.08);
-}
-
-/* =============================== */
-/* 6. Modal                        */
-/* =============================== */
-.modal-content {
-  border-radius: 16px;
-  animation: scaleFadeIn 0.3s ease;
-}
-@keyframes scaleFadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-/* =============================== */
-/* 7. Scroll To Top                */
-/* =============================== */
-#scrollToTopBtn {
-  border-radius: 50%;
-  background: var(--primary-green);
-  color: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-#scrollToTopBtn:hover {
-  background: var(--dark-green);
-}
-
-/* ==================================== */
-/* 12. Statistics Section (ส่วนสถิติ)   */
-/* ==================================== */
-.stats-section {
-    margin-top: 30px;
-    padding: 25px;
-    background-color: var(--light-cream);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: inset 0 1px 5px var(--shadow-color);
-    text-align: center;
-    transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInSlideUp 0.6s ease-out forwards;
-    animation-delay: 0.5s;
-}
-
-.stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.stat-card {
-    background-color: var(--container-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 20px;
-    width: 250px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 2px 10px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px var(--shadow-color);
-}
-
-.stat-card i {
-    font-size: 2.5em;
-    color: var(--primary-green);
-}
-
-.stat-content {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-.stat-number {
-    font-size: 2em;
-    font-weight: 700;
-    color: var(--dark-green);
-    line-height: 1;
-}
-
-.stat-label {
-    font-size: 0.9em;
-    font-weight: 400;
-    color: var(--text-color);
-}
-
-
+		/* =============================== */
+		/* 7. Scroll to Top                */
+		/* =============================== */
+		#scrollToTopBtn {
+		  border-radius: 50%;
+		  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+		}
 
     </style>
 </head>
@@ -1319,7 +1114,7 @@ body.dark-mode .result-section {
             </section>
         </main>
     </div> 
-			<footer style="padding: 25px 20px; background-color: #f0f7f4; border-top: 1px solid #b7e4c7; margin-top: 50px; font-family: 'Sarabun', sans-serif;">
+				<footer style="padding: 25px 20px; background-color: #f0f7f4; border-top: 1px solid #b7e4c7; margin-top: 50px; font-family: 'Sarabun', sans-serif;">
 				  <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 20px;">
 					
 					<img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" 
@@ -1363,6 +1158,7 @@ body.dark-mode .result-section {
 				Google Drive
 			  </a>
         </div>
+    
     </div>	
 	
 
@@ -1402,7 +1198,15 @@ body.dark-mode .result-section {
 
         // Your Data (cleaned doc_number - removed dots if any)
         const rawData = [
-            {
+			{
+                doc_number: 0,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'ทุ่งฟ้าผ่า',
+                document_link: 'https://drive.google.com/file/d/1fldTg4Zc_6BvN3B0c9p9ShoyFlVUjWF_/view?usp=sharing',
+                map_link: ''
+            },
+			{
                 doc_number: 1,
                 province: 'จันทบุรี',
                 district: 'เมืองจันทบุรี',
@@ -1501,7 +1305,7 @@ body.dark-mode .result-section {
 			{
                 doc_number: 97,
                 province: 'จันทบุรี',
-                district: 'ขลุง',
+                district: 'อำเภอขลุง',
                 location: 'กระโจมไฟเกาะจิก กรมอุทกศาสตร์ ทร',
                 document_link: 'https://drive.google.com/file/d/1QrOID0h-KP0E57vsM0gfonqNqOcNllaV/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=164zU7Tq_o3pXXuimItLoUpP0PPO--lg&usp=sharing'
@@ -1559,7 +1363,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'อำเภอขลุง',
                 location: 'จัดให้เช่า(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1OstcqgpLoNNzEbRH3EUlO-81kPlTRNeK/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1rpRe_EHwVYOBOFtxsR3XB03H3dF0Ff49/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1GEeTMdoFJ7X3I7ykTlPOmT6XbPMwdyQ&usp=sharing'
             },
 			{
@@ -1567,7 +1371,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'อำเภอขลุง',
                 location: 'จัดให้เช่า(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1H6sAITYdrSX1zqdyW2MSfgb-aGnv-rgy/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1vsIlcRhzhtOPl-stO4khZYfpWEIJfxPz/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1JR-ggHxVkv6Jfubr5wvg5Io83AdUwdU&usp=sharing'
             },
 			{
@@ -1575,7 +1379,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'อำเภอขลุง',
                 location: 'จัดให้เช่า(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/13BOsGse2pAzd5WsTMJD-CQQUuoHoyZ1i/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1AJAUgWDg4qPOo4FRBsBrWkvIX756OzRl/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1Eh2TzMDf_JMQCLiqzg8_bSv6Zo6BPXc&usp=sharing'
             },
 			{
@@ -1583,7 +1387,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'อำเภอขลุง',
                 location: 'เทศบาลตำบลขลุงใช้และจัดให้เช่า(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1UW-QmMTTVlxRppHPAma6PUy0JLgkk8sO/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1WHkUFYChePL3tjhAZJhv4rO9MeOgsVPl/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1uwsbtreBSGvB6-2kkDiyyVmSmFEX4Nw&usp=sharing'
             },
 			{
@@ -1591,7 +1395,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'อำเภอขลุง',
                 location: 'จัดให้เช่า(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1Ej5zr3cRWESTxwBn19Qr7jKOVEtYQowU/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1rsiE7V6aRXKicxOKgdUezato0O9Rync2/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1lZc2oVD1jhd9Wdu-9cArMECEwZ_nwGo&usp=sharing'
             },
             {
@@ -1607,7 +1411,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'อำเภอนายายอาม',
                 location: 'โรงเรียนบ้านคลองลาว',
-                document_link: 'https://drive.google.com/file/d/1Dt2zHzEUy2jx1sPkWY9PdUYxTyiZ1BcH/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/19UPPQn80GBze4Y3J-IZlONcK1uPTRwSN/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1iXA4bYFIn_U-KKdHaWhCcPnic2oo_gs&usp=sharing'
             },
             {
@@ -1647,7 +1451,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'เมืองจันทบุรี',
                 location: 'จัดให้เช่า(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1xbhXM-pIiw9HScyZ0qeVjcXMcYY8gua2/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1JPfDRCN8Il03mBEf8Wby4kxPzDNJ7vdL/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1Tvuxqz1Pyl61Iynk21TNgFI7kyHnqwI&usp=sharing'
             },
             {
@@ -1663,7 +1467,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'เมืองจันทบุรี',
                 location: 'จัดให้เช่า(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1xbhXM-pIiw9HScyZ0qeVjcXMcYY8gua2/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1FQNJ08ivDLY0VhjYV6sFgtigNe5ur8bU/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1VD9b0gBZU55ZZw6Ixn6Wl1SyDWX4fjo&usp=sharing'
             },
             {
@@ -1675,19 +1479,11 @@ body.dark-mode .result-section {
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1Na4LMnm0CuI2lu40CKY2TW9UKLG26CE&usp=sharing'
             },
 			{
-                doc_number: 229,
-                province: 'จันทบุรี',
-                district: 'เมืองจันทบุรี',
-                location: 'เป็นที่ตั้งบ้านพักข้าราชการมหาดไทย (โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1eeB5JQboUCEq1ya7s-3S8irb8oRCJRSy/view?usp=sharing',
-                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1BUZ_9eup1_5GxkzwOeO9zAtKRH6PoYs&usp=sharing'
-            },
-			{
                 doc_number: 232,
                 province: 'จันทบุรี',
                 district: 'เมืองจันทบุรี',
                 location: 'โรงเรียนวัดเนินสูง (โฉนด)',
-                document_link: 'https://drive.google.com/file/d/19zcaVZZIQzg1jognioj2lV8sWVeb3BBZ/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1OP84ofGP46_c1D0D-dWtiuuDOX1N3Oy7/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1yNAzXLI9gqtDvIQqQ5ARlunFkLpGH3g&usp=sharing'
             },
             {
@@ -1703,7 +1499,7 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'อำเภอขลุง',
                 location: 'จัดให้ราษฎรเช่าเพื่ออยู่อาศัยและประโยชน์อย่างอื่น/เทศบาลก่อสร้างถนนคอนกรีตเสริมเหล็กพร้อมท่อระบายน้ำ(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1DbliY4PR8q-HHDKv3qDyu9niSnKvapUs/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/10j9gg_rIzVN1ooK3x1v3EvHjH9D2sRzb/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1_zC_EeFy3ZR3vPupEyoPPFvr58LKGDU&usp=sharing'
             },
             {
@@ -1719,8 +1515,32 @@ body.dark-mode .result-section {
                 province: 'จันทบุรี',
                 district: 'เมืองจันทบุรี',
                 location: 'ใช้เป็นที่ตั้งโรงเรียนบ้านเกาะลอย/อบต.เกาะขวางใช้สร้างลานกีฬาอนกประสงค์,ศาลาอเนกประสงค์และถนนบางส่วน(โฉนด)',
-                document_link: 'https://drive.google.com/file/d/1MTnZ1xCustyIsdIqwJ8V-DVh90PrzG8-/view?usp=sharing',
+                document_link: 'https://drive.google.com/file/d/1W7ILpqrvgUX7zI21vENGJGIcJ-J9Bb2K/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1LAvfmcdiHG-yCFt7oygYBE4sJqr765g&usp=sharing'
+            },
+			{
+                doc_number: 266,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'ใช้เป็นที่ตั้งการประปาจันทบุรี(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1HO928r1kyc0GkswYzs4N6_UWOBZE82SO/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1MGuBvDFeRjHOnOw4NroV4uYSU7u0h_A&usp=sharing'
+            },
+			{
+                doc_number: 274,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'ที่ตั้งสถานีอนามัยคลองนารายณ์(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1a8s2l5ffz0lUGHFY1pBf_vNWTk54SSXA/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1hdTkm5j4DJdowKkyjEwnpvsTrXVzxo0&usp=sharing'
+            },
+			{
+                doc_number: 276,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'สถานีอนามันตำบลพลับพลา(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1zoUZQlgVRMeMXaDLzBrJErxRyCnz-UuM/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1OHLHDkkUJVcHV1Xa2lb_nBiFlucxZU4&usp=sharing'
             },
             {
                 doc_number: 289,
@@ -1738,6 +1558,22 @@ body.dark-mode .result-section {
                 document_link: 'https://drive.google.com/file/d/1aqC1-QbnM8y0z8KlsLdRjCo4EzO-Uq15/view?usp=drive_link',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=16AISp5cVozUEXFXBKOdpfz8cJjv-9zI&usp=sharing'
             },
+			{
+                doc_number: 303,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'ใช้เป็นที่ตั้งสถานีอนามัยชั้น 2 ตำบลบางกะจะ(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/18f3H0fNWD3qInrtwvz4gWHy0862iBSQr/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1MaghK84xRONtOKnK5pyP656zovEh2j4&usp=sharing'
+            },
+			{
+                doc_number: 306,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'ที่ตั้งบ้านพัก ผ.อ.โรงเรียนท่าใหม่พูลสวัสดิ์ราษฎร์นุกูล(โฉนด)',
+                document_link: 'ที่ตั้งบ้านพัก ผ.อ.โรงเรียนท่าใหม่พูลสวัสดิ์ราษฎร์นุกูล',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1IJaHnlsMhr_-ImADbhdzo7IILpjulz8&usp=sharing'
+            },
             {
                 doc_number: 310,
                 province: 'จันทบุรี',
@@ -1754,6 +1590,38 @@ body.dark-mode .result-section {
                 document_link: 'https://drive.google.com/file/d/1-J5c9yhguU6LzjCnOQ8e2P5kpaJIU9pH/view?usp=drive_link',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1yGAHnAOGHA57B5XBUhQEDou3QLBqy6E&usp=sharing'
             },
+			{
+                doc_number: 324,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'โรงเรียนเบญจมราชาชูทิศ(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/17dkVuM7OfrXhI6xFPEtUjavE2jL4V9fx/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1zvS4xlit6IwE1aQo87Boa6xT3g-OxH8&usp=sharing'
+            },
+			{
+                doc_number: 340,
+                province: 'จันทบุรี',
+                district: 'อำเภอโป่งน้ำร้อน',
+                location: 'เป็นที่ตั้งของโรงเรียนบ้านคลองคต(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1-vo9iK7nnpw_xE_u8EqRHDmWew-1tjq3/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1JjO44ToKVwmPYCE84wCnyP_IkhjteQg&usp=sharing'
+            },
+			{
+                doc_number: 347,
+                province: 'จันทบุรี',
+                district: 'อำเภอมะขาม',
+                location: 'โรงเรียนวังตัก แปลงเกษตร(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1ToLdGEL9okPC7tUN51bM8dLXct3Lub6e/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1nLUTlZaRQX9u0ezaByk4pTFDN6k9MR0&usp=sharing'
+            },
+			{
+                doc_number: 348,
+                province: 'จันทบุรี',
+                district: 'อำเภอมะขาม',
+                location: 'ที่ตั้งของโรงเรียนวังแซ้ม(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/17oAQPGxyAe32npsh-nn_TH0uyXfcaLWV/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=14R0rWRVgAA9jZnAdYzOc1PR7qfGFx80&usp=sharing'
+            },
             {
                 doc_number: 353,
                 province: 'จันทบุรี',
@@ -1761,6 +1629,118 @@ body.dark-mode .result-section {
                 location: 'ที่ตั้งวิทยาลัยพยาบาลพระปกเกล้า',
                 document_link: 'https://drive.google.com/file/d/1BIe7BWw_NZmX1QcKfzEKQSHnBtzwSuTc/view?usp=drive_link',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1M3bHr6z7ALisCsxVXltXrRPXSDcQznY&usp=sharing'
+            },
+			{
+                doc_number: 356,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'ทสภ.ต.ทุ่งเบญจา(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1PnwAwXHNUEeCsAY8GegTG4op95jN2uXC/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1IzWI3amQInlt-4g830BVb59jipmLw5M&usp=sharing'
+            },
+			{
+                doc_number: 357,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'สภ.ต.ทุ่งเบญจา(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1Bnv4EcUk0GlpiQFsDcwDEgMsyKkQU_Jf/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1NP9xIusbXeXRGb_-jNTXztf0u-teXBg&usp=sharing'
+            },
+			{
+                doc_number: 358,
+                province: 'จันทบุรี',
+                district: 'อำเภอเขาคิชฌกูฏ',
+                location: 'ที่ตั้งโรงเรียนวัดคลองตะเคียน(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1mW0hNX68ZXnqG0OWUfyUFTsfTYdt2JvX/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1l1XzpAyESaTy289SuptVl4MmxCCrri8&usp=sharing'
+            },
+			{
+                doc_number: 377,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'จัดให้เช่า/เป็นบ้านพักข้าราชการสรรพมิตจังหวัดจันทบุรี/บ้นพักข้าราชการกระทรวงอุตสาหกรรม(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1ijw3qYFNBYiuj47bVpBY9P5fVc-64ngP/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1F_0c5Vk3r4tJnm4GVnKNqylRwfmBO-Q&usp=sharing'
+            },
+			{
+                doc_number: 379,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1O9EmcimoS20EHc3WV1-C9FMx_TewPygv/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1RCLCAqsxU2W1eNSc4ii-7mE7IdVnKuY&usp=sharing'
+            },
+			{
+                doc_number: 380,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'กองทัพบกจัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1RKQ1SNPbdlky8pOfixk52PdiHh6L_d5h/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=18cd3MBAX0n-Y9KrTKFwLiC-1J_oaPH0&usp=sharing'
+            },
+			{
+                doc_number: 381,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1AJ02gJAaCKVTgAsrP1Y0Gx81UUxrOE38/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1nm2TZ54_9PzJxutENeJiiBgeDuOEd2s&usp=sharing'
+            },
+			{
+                doc_number: 382,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1yXJ3aFjoAsTD7FsrS96yQSJvvtorUVRW/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1grGZ-nJMSrM__Xrb5C3q1A1M9U-x6_g&usp=sharing'
+            },
+			{
+                doc_number: 383,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1uWViruwheqNBSXaXthd7GX392wx1g3Tt/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1DRpwIk9dOH1GeQ-fLts2hnex9B5LcY8&usp=sharing'
+            },
+			{
+                doc_number: 389,
+                province: 'จันทบุรี',
+                district: 'อำเภอขลุง',
+                location: 'สำนักงานเกษตรอำเภอขลุง(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/14baFpMUr1Qq3PNALpHQ5rTJOAfbnshxt/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1NPBdbal_S9s0eqwVqlwLdvq28rTEiZk&usp=sharing'
+            },
+			{
+                doc_number: 393,
+                province: 'จันทบุรี',
+                district: 'อำเภอขลุง',
+                location: 'สำนักงานเกษตรอำเภอขลุง(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1RqbXpuHw_69Amuj_kqdoCQod1L067-h5/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1Wnz8Ny2vjBcHFx0bAJq1rvJrLVsBXL8&usp=sharing'
+            },
+			{
+                doc_number: 395,
+                province: 'จันทบุรี',
+                district: 'อำเภอนายายอาม',
+                location: 'ที่ว่าการอำเภอ(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/14PI-LZcYK9EyVxKKaZH1Kt0VaCeb30tT/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1u6G_csNo-cdx7-rdAcPo0gu8KVmVmeI&usp=sharing'
+            },
+			{
+                doc_number: 396,
+                province: 'จันทบุรี',
+                district: 'อำเภอนายายอาม',
+                location: 'โรงเรียนนายายอามพิทยาคม(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1FipXfB_REHnc8iWrB-BsMRgnsKEV02tb/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=12-lrdtdF-Vw3GHSRR5quvM0pyrYThS0&usp=sharing'
+            },
+			{
+                doc_number: 397,
+                province: 'จันทบุรี',
+                district: 'อำเภอนายายอาม',
+                location: 'สถานีอนามัยตำบลกระแจะ(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1ariRdPIkzYmkUD6pLmv95ILcJ_R_Kqb3/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1ZTKGwubsSpuoLaRFwPzP1obC9SyJoaA&usp=sharing'
             },
             {
                 doc_number: 398,
@@ -1786,6 +1766,62 @@ body.dark-mode .result-section {
                 document_link: 'https://drive.google.com/file/d/1gQYXr8LGWFPxDOMM398kx0L3DCVKCn4K/view?usp=drive_link',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1d97j7In5JS8LpRmbpmY3SqojPaSmZho&usp=sharing'
             },
+			{
+                doc_number: 406,
+                province: 'จันทบุรี',
+                district: 'อำเภอมะขาม',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1zssPtA8kxC_Um9D7AUknshAgX5LXmHvU/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1RHCw9xBPUsbnVUzkj_NVXuX2oCGxSsY&usp=sharing'
+            },
+			{
+                doc_number: 407,
+                province: 'จันทบุรี',
+                district: 'อำเภอมะขาม',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1tcv_V6ed2B1JpbVi92sFRUMO6oAyYPvI/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1WK2aRY4rHv6t9DzSrxes0IQOKVSajlA&usp=sharing'
+            },
+			{
+                doc_number: 408,
+                province: 'จันทบุรี',
+                district: 'อำเภอมะขาม',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1DSt6YnoaVpmQHgWzp0_pXnmoA1iv6sbw/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1wonwZa-BCrXBgjE-teEW4wv3FUQTyDg&usp=sharing'
+            },
+			{
+                doc_number: 409,
+                province: 'จันทบุรี',
+                district: 'อำเภอมะขาม',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1G9UA5wqDk7uUjupENuNkHKwbmEpfZtSj/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1WA4q3r_QXAJAoPLT3bICz4QpcQf6wes&usp=sharing'
+            },
+			{
+                doc_number: 410,
+                province: 'จันทบุรี',
+                district: 'อำเภอมะขาม',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/14E7aDYmWCyPvV9KrPQKRiUAMmPsRIp1G/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1p40aBqwKCPzdt2qmoYPiQ5T-SCy42fI&usp=sharing'
+            },
+			{
+                doc_number: 411,
+                province: 'จันทบุรี',
+                district: 'อำเภอมะขาม',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1kNxC-rhz_xm15w5U0R6rWPLkM6Br0HN6/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1wKYeiu3CEsz_qpMu9QX5SnNv2U2Wwos&usp=sharing'
+            },
+			{
+                doc_number: 421,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'โรงเรียนวัดแสลง(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1sLBamM4XS2juiQlqwGGyb7R2fUdCb3EQ/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1KyzylD8zNbYiINI94BGJb5GO7CZfhgk&usp=sharing'
+            },
             {
                 doc_number: 427,
                 province: 'จันทบุรี',
@@ -1794,6 +1830,14 @@ body.dark-mode .result-section {
                 document_link: 'https://drive.google.com/file/d/1KYFoijq6Ly02GvHnrE_buG8rCvCpVdrG/view?usp=drive_link',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1S21A0ETgmKZPd8MeeF0oT-D3sghbvOo&usp=sharing'
             },
+			{
+                doc_number: 430,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'สถานีอนามัยบ้านพลับพลา(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/161ZjQuj_SEjRfNxX6yq3oR8yjbDvQF1D/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1OIjv5oxEWEcOx_tZp_XCEbJGAqlLFyU&usp=sharing'
+            },
             {
                 doc_number: 436,
                 province: 'จันทบุรี',
@@ -1801,6 +1845,70 @@ body.dark-mode .result-section {
                 location: 'โรงเรียนวัดท่าอุดม (ยุบเลิก)',
                 document_link: 'https://drive.google.com/file/d/1Zml_1b3WMqPEzRjtKi1wScAaQ2687uSJ/view?usp=drive_link',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1K1OGLC4_ksTWpD4ktfirY8mPnkw4lXY&usp=sharing'
+            },
+			{
+                doc_number: 445,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'สถานีอนามัยบ้านพลับพลา(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1k-uJUZhqa8ntT6dKNTInALhZ7bDiv760/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1UPvaOzOoOX3e6CiWt1lVl6HebN-snB4&usp=sharing'
+            },
+			{
+                doc_number: 447,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'กองทัพเรือ/ที่ตั้งกองพันทหารราบที่ 2 กองพลนาวิกโยธิน(ค่ายตากสิน)(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/19LWveBegzIiIQoky7KIOWQVUuEDWR8xs/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1z2sG8WqoJK1BkELTV3cFFbHSuS_eehY&usp=sharing'
+            },
+			{
+                doc_number: 449,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'ที่ตั้งกองพันทหารราบที่ 2 กองพลนาวิกโยธิน(ค่ายตากสิน)(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1FMCwGtN-aQSBlxRUOFqlxlENBzkiS4op/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1Lqj_pBqNEYXrX79RzdrPnpO5CRqzxr8&usp=sharing'
+            },
+			{
+                doc_number: 450,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'ที่ตั้วกองพันทหารราบที่ 2 กองพลนาวิกโยธิน(ค่านตากสิน)(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1SK1IZ-XYdkgF2ayqJPYv8TZ0MD6QfNzY/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1Rlv71fA7rDktQ-HKBjvZysI-BymJcOE&usp=sharing'
+            },
+			{
+                doc_number: 455,
+                province: 'จันทบุรี',
+                district: 'อำเภอขลุง',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1VrvMZnCD_xaFxqu1PlJVXMDS_Fdpzz5z/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1EDvTMqMNplvNnfMhH2fEPIhJDbnHlwA&usp=sharing'
+            },
+			{
+                doc_number: 456,
+                province: 'จันทบุรี',
+                district: 'อำเภอขลุง',
+                location: 'จัดให้เช่า(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1KyxyaZdF4Dw0fIJk8qA7ALoPdxNCEGqM/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=18J-ihqtR1_F6nD9-jEh17X2X5w0Ui3Y&usp=sharing'
+            },
+			{
+                doc_number: 458,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'โรงเรียนเบญจมานุสรณ์(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/13Z-BjwHXXhevd-ohmjuG585ZBE1x2eAv/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1rqn_gl-bOlRRNqyJ66Rrmou9gVUqED8&usp=sharing'
+            },
+			{
+                doc_number: 462,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'เดิมเป็นโรงเรียนวัดห้องคูหาปัจจุบันอนุญาตให้ อบต.คลองนารายณ์ก่อสร้างลานกีฬา(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1j1cIrQdlmyTm09n-XQQNJBB2DlQuEFAk/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1HEn0zLMQQAk6fbrnAzZ4owfyHOQ2Z3E&usp=sharing'
             },
 			{
                 doc_number: 465,
@@ -1818,6 +1926,70 @@ body.dark-mode .result-section {
                 document_link: 'https://drive.google.com/file/d/1WOFSLvobnm550ueLNmZAN-tu_BTRS4C4/view?usp=drive_link',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1zvAIwuVvBdbktu-QUvKa9Z4GcBo95WE&usp=sharing'
             },
+			{
+                doc_number: 468,
+                province: 'จันทบุรี',
+                district: 'อำเภอสอยดาว',
+                location: 'บ้านพักเกษตรตำบลทรายขาวและบ้านพักเกษตรตำบลปะตง(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1Ga5OPVG9yLx0hUZEcN2gpD8rwjasbfyz/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1S31_Lg7QC35qihR-pXXIattBExWyTuU&usp=sharing'
+            },
+			{
+                doc_number: 473,
+                province: 'จันทบุรี',
+                district: 'อำเภอเขาคิชฌกูฏ',
+                location: 'บ้านพักครูโรงเรียนคลองน้ำเป็น(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/126ti5iF3gu8WVVK5NiCa6LcFkeA-xULm/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1zWreTLnPtt7RalY7QjXOYCtMP2ZMMxQ&usp=sharing'
+            },
+			{
+                doc_number: 474,
+                province: 'จันทบุรี',
+                district: 'อำเภอโป่งน้ำร้อน',
+                location: 'แปลงเกษตรโรงเรียนบ้านพังงอน(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/152w-VSUiuo1-fItqsLCBsPZUposSe4Tn/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1tbZlw0pG2jnOw_WiKVei9AxucNy_IUM&usp=sharing'
+            },
+			{
+                doc_number: 479,
+                province: 'จันทบุรี',
+                district: 'อำเภอเขาคิชฌกูฏ',
+                location: 'บ้านพักเกษตรตำบลพลวงและตำบลวังแซ้ม(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1Zc4D_fRViCAh--IiERyyUh2N1MkAidSD/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1gZxdBW9RkR1LnOVdnPJEC-4DNToA7_Y&usp=sharing'
+            },
+			{
+                doc_number: 480,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'กองทัพอากาศ สนามบินท่าใหม่(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1D9CbkrZFXdq3WgV_vz6aNysetYeV-DpO/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=15YwOV-CSD_FQH7YfaTCtSYMiah1TZdw&usp=sharing'
+            },
+			{
+                doc_number: 481,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'กองทัพอากาศ สนามบินท่าใหม่(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1-Ls4RX-hI8d58QZfv2e6hhszY5POviGC/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=10u3bbywMMk8K8m6EIuc71I1zfl7XAKI&usp=sharing'
+            },
+			{
+                doc_number: 482,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'กองทัพอากาศ สนามบินท่าใหม่(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1oS4ry7FJaAJiYucmhCWMkJWhfejgB11E/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1bW7Fb53JLwaBuB4ZpDyf-v-NdRx5340&usp=sharing'
+            },
+			{
+                doc_number: 485,
+                province: 'จันทบุรี',
+                district: 'เมืองจันทบุรี',
+                location: 'บ้านพักครูโรงเรียนบางกะจะและป้อมตำรวจ(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/16aNf4-nXFFz2kil3obt3QBjyq_tXXWzv/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1Kzj4qIzqq2OxZuBXZdoOfv1qsDmCqxU&usp=sharing'
+            },
             {
                 doc_number: 487,
                 province: 'จันทบุรี',
@@ -1825,6 +1997,22 @@ body.dark-mode .result-section {
                 location: 'โครงการชลประทานจันทบุรี',
                 document_link: 'https://drive.google.com/file/d/1r9g2mHd9tFIjje2lCSp49YaZiC58kxXV/view?usp=sharing',
                 map_link: 'https://www.google.com/maps/d/u/1/edit?mid=15Y4SaBVazS-u7O38Bpqj427Nv3yDmgY&usp=sharing'
+            },
+			{
+                doc_number: 501,
+                province: 'จันทบุรี',
+                district: 'อำเภอเขาคิชฌกูฏ',
+                location: 'สถานีสูบน้ำโครงการเขื่อนไฟฟ้าพลังน้ำคลองทุ่งเพล 1(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1yQ7BssgK7aO0uCizZ6gLF-_ZVMNuP733/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1gnive-EqB6Sv6nsoHO6W3AZC8N6BcvQ&usp=sharing'
+            },
+			{
+                doc_number: 506,
+                province: 'จันทบุรี',
+                district: 'อำเภอท่าใหม่',
+                location: 'สถานีตำรวจภูธรท่าใหม่(โฉนด)',
+                document_link: 'https://drive.google.com/file/d/1ap3SnFUgQqG-5nqms4a4M7RmphfOcsGj/view?usp=sharing',
+                map_link: 'https://www.google.com/maps/d/u/1/edit?mid=1bgUlSMuYv1zrmS3UnUqRxYMBsm5Thdk&usp=sharing'
             },
             {
                 doc_number: 507,
@@ -2275,6 +2463,7 @@ body.dark-mode .result-section {
 		  infoModal.style.display = "flex";
 		  document.body.classList.add("modal-open");
 		});
+
 
     </script>
 </body>
