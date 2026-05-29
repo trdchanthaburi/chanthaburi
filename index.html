@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เข้าสู่ระบบ - ระบบข้อมูลที่ราชพัสดุ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+    --primary-green:#008000;
+    --dark-green:#006600;
+    --bg: linear-gradient(135deg,#e8f5e9,#ffffff);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Prompt',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:var(--bg);
+}
+
+/* การ์ด */
+.login-box{
+    width:380px;
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+    text-align:center;
+    animation:fade 0.5s ease;
+}
+
+@keyframes fade{
+    from{transform:translateY(20px);opacity:0;}
+    to{transform:translateY(0);opacity:1;}
+}
+
+/* โลโก้ */
+.logo img{
+    width:85px;
+    margin-bottom:10px;
+}
+
+/* หัวข้อ */
+h2{
+    color:var(--primary-green);
+    margin-bottom:5px;
+}
+
+.subtitle{
+    font-size:13px;
+    color:#555;
+    margin-bottom:25px;
+}
+
+/* input */
+.input-group{
+    position:relative;
+    margin-bottom:15px;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px 45px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    transition:0.3s;
+}
+
+.input-group input:focus{
+    border-color:var(--primary-green);
+    box-shadow:0 0 0 3px rgba(0,128,0,0.15);
+}
+
+/* icon */
+.input-group i{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    color:#888;
+}
+
+.left{left:15px;}
+.right{right:15px; cursor:pointer;}
+
+/* ปุ่ม */
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:var(--primary-green);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:10px;
+}
+
+button:hover{
+    background:var(--dark-green);
+    transform:translateY(-2px);
+}
+
+/* error */
+#error{
+    margin-top:10px;
+    color:red;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png">
+    </div>
+
+    <h2>เข้าสู่ระบบ</h2>
+    <div class="subtitle">ระบบสืบค้นราคาประเมินที่ราชพัสดุ</div>
+
+    <div class="input-group">
+        <i class="fa fa-user left"></i>
+        <input type="text" id="username" placeholder="ชื่อผู้ใช้งาน">
+    </div>
+
+    <div class="input-group">
+        <i class="fa fa-lock left"></i>
+        <input type="password" id="password" placeholder="รหัสผ่าน">
+        <i class="fa fa-eye right" onclick="togglePass()"></i>
+    </div>
+
+    <button onclick="login()">เข้าสู่ระบบ</button>
+
+    <div id="error"></div>
+</div>
+
+<script>
+
+const users=[{username:"admin",password:"1234"}];
+
+function login(){
+    const u=document.getElementById("username").value;
+    const p=document.getElementById("password").value;
+    const error=document.getElementById("error");
+
+    const user=users.find(x=>x.username===u && x.password===p);
+
+    if(user){
+        sessionStorage.setItem("login","true");
+        window.location.href="home.html";
+    }else{
+        error.innerHTML="ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
+    }
+}
+
+function togglePass(){
+    const pass=document.getElementById("password");
+    pass.type=pass.type==="password"?"text":"password";
+}
+
+</script>
+
+</body>
+</html>
