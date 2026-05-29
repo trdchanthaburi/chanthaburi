@@ -324,18 +324,24 @@ button:active {
 </div>
 
 <script>
-const users = [{username: "admin", password: "chanthaburi"}];
+// แปลงค่าเป้าหมายเป็น Base64 ไว้ล่วงหน้า 
+// 'admin' แปลงได้ 'YWRtaW4='
+// 'chanthaburi' แปลงได้ 'Y2hhbnRoYWJ1cmk='
 
 function login() {
     const u = document.getElementById("username").value;
     const p = document.getElementById("password").value;
     const error = document.getElementById("error");
 
-    const user = users.find(x => x.username === u && x.password === p);
+    // แปลงค่าที่ผู้ใช้พิมพ์เข้ามาให้เป็น Base64 ก่อนนำไปเปรียบเทียบ
+    // btoa() เป็นฟังก์ชันสากลของ Browser สำหรับแปลงข้อความเป็น Base64
+    const encodedUser = btoa(u);
+    const encodedPass = btoa(p);
 
-    if (user) {
+    // เช็กเงื่อนไขด้วยค่าที่เข้ารหัสแล้ว
+    if (encodedUser === "YWRtaW4=" && encodedPass === "Y2hhbnRoYWJ1cmk=") {
         sessionStorage.setItem("login", "true");
-        window.location.href = "home.html";
+        window.location.href = "home.html"; 
     } else {
         error.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
     }
@@ -347,12 +353,11 @@ function togglePass() {
     
     if (pass.type === "password") {
         pass.type = "text";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
+        // ปรับเป็นคลาสเวอร์ชั่นใหม่เพื่อป้องกันไอคอนหาย
+        icon.className = "fa-solid fa-eye-slash right"; 
     } else {
         pass.type = "password";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
+        icon.className = "fa-solid fa-eye right";
     }
 }
 
@@ -360,6 +365,11 @@ function checkEnter(event) {
     if (event.key === "Enter") {
         login();
     }
+}
+
+// ฟังก์ชันเสริม: ช่วยล้างข้อความแจ้งเตือนสีแดงทันทีเมื่อผู้ใช้เริ่มพิมพ์ใหม่
+function clearError() {
+    document.getElementById("error").innerHTML = "";
 }
 </script>
 
