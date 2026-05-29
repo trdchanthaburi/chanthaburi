@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="SghRc2vc080TaM2lymepxR3xfwlxapeBpJSwht8pHog" />
     <title>หน้าแรก - ระบบข้อมูลที่ราชพัสดุ</title>
-    <meta name="description" content="ประเมินที่ราชพัสดุธนารักษ์พื้นที่จังหวัดจันทบุรี">
     <meta name="description" content="ค้นหาราคาประเมินที่ราชพัสดุสำนักงานธนารักษ์พื้นที่จันทบุรี">
+    
     <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CN2CDEGJLV"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){ dataLayer.push(arguments); }
       gtag('js', new Date());
-    
       gtag('config', 'G-CN2CDEGJLV');
+    </script>
+
+    <script>
+       if (sessionStorage.getItem("login") !== "true") {
+		   window.location.href = "index.html";
+		}
     </script>
         
     <style>
@@ -62,9 +66,22 @@
             width: 90%;
         }
 
-        .logo { height: 110px; margin-bottom: 15px; }
-        h1 { color: var(--primary-green); font-size: 1.5rem; margin: 5px 0; line-height: 1.4; }
-        p.subtitle { color: #444; margin-bottom: 30px; }
+        .logo { 
+            height: 110px; 
+            margin-bottom: 15px; 
+        }
+        
+        h1 { 
+            color: var(--primary-green); 
+            font-size: 1.5rem; 
+            margin: 5px 0; 
+            line-height: 1.4; 
+        }
+        
+        p.subtitle { 
+            color: #444; 
+            margin-bottom: 30px; 
+        }
 
         .button-grid {
             display: grid;
@@ -90,6 +107,25 @@
             background-color: var(--primary-green);
             color: white;
             transform: translateY(-5px);
+        }
+
+        /* ปุ่มออกจากระบบ */
+        .logout-btn {
+            margin-top: 25px;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 10px;
+            background: #cc0000;
+            color: white;
+            cursor: pointer;
+            font-family: 'Prompt', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #990000;
         }
 
         /* กล่องนับเลขที่มุมขวาล่าง */
@@ -147,6 +183,10 @@
             </a>
         </div>
 
+        <button onclick="logout()" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
+        </button>
+
         <div class="footer-copyright">
             &copy; 2026 สำนักงานธนารักษ์พื้นที่จันทบุรี
         </div>
@@ -162,6 +202,13 @@
             </a>
         </noscript>
     </div>
+
+    <script>
+        function logout() {
+			sessionStorage.removeItem("login");
+			window.location.href = "index.html";
+		}
+    </script>
 
 </body>
 </html>
