@@ -14,8 +14,8 @@
     --dark-green: #005c36;
     --accent-gold: #D4AF37;
     --text-dark: #2c3e50;
-    --glass-bg: rgba(255, 255, 255, 0.88);
-    --glass-border: rgba(255, 255, 255, 0.4);
+    /* เปลี่ยนสีพื้นหลังฝั่งฟอร์มเป็นสีเขียวข้าราชการแบบสว่างนุ่มนวล */
+    --bg-gov-light: #f1f7f4; 
 }
 
 * {
@@ -28,78 +28,133 @@
 body {
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    /* พื้นหลังแนวธรรมชาติ+อาคารสำนักงาน ผสมกับเลเยอร์สีเขียวหัวเป็ดจางๆ ให้ดูน่าเชื่อถือ */
-    background: linear-gradient(135deg, rgba(0, 56, 33, 0.65), rgba(0, 122, 72, 0.45)), 
+    background-color: var(--bg-gov-light);
+    overflow: hidden;
+}
+
+/* Container หลักแบ่งหน้าจอ */
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================
+   ฝั่งซ้าย: แสดงรูปภาพและข้อความต้อนรับ
+   ========================================== */
+.left-side {
+    flex: 1.2;
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 56, 33, 0.85), rgba(0, 122, 72, 0.65)), 
                 url('https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    color: white;
 }
 
-/* ตัวการ์ดเข้าสู่ระบบสไตล์กระจกฝ้า (Glassmorphism) */
-.login-box {
-    width: 400px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 40px 35px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.22);
-    text-align: center;
-    position: relative;
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes fadeInUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* จัดวางโลโก้กรมธนารักษ์ให้ลอยขึ้นเหนือขอบการ์ดเล็กน้อย เพิ่มมิติ */
-.logo {
+.left-side::after {
+    content: '';
     position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    padding: 10px;
-    border-radius: 50%;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.15), transparent 60%);
+    pointer-events: none;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px; /* ขยายกว้างขึ้นเล็กน้อยเพื่อให้กลุ่มคำไม่ถูกบีบให้ตกบรรทัดเร็วเกินไป */
+    animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.welcome-content h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* คลาสพิเศษช่วยล็อกคำสำคัญไม่ให้แตกแยกออกจากกัน */
+.keep-together {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.welcome-content p {
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.95;
+    line-height: 1.8; /* เพิ่มระยะบรรทัดให้อ่านง่าย สบายตาขึ้น */
+    text-align: justify;
+}
+
+/* ==========================================
+   ฝั่งขวา: ฟอร์มเข้าสู่ระบบ (ปรับสีพื้นหลังใหม่)
+   ========================================== */
+.right-side {
+    flex: 1;
+    background: var(--bg-gov-light); /* ใช้สีเขียวสว่างสไตล์ราชการ */
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 40px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.03);
 }
 
-.logo img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    background: white; /* ตัวการ์ดใช้สีขาวเพื่อให้ลอยเด่นขึ้นมาจากพื้นหลังใหม่ */
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 56, 33, 0.06); /* ใช้เงาอมเขียวจางๆ */
+    animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* หัวข้อและคำอธิบาย */
-h2 {
-    color: var(--primary-green);
-    margin-top: 45px;
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.subtitle {
-    font-size: 14px;
-    color: #555;
+/* ส่วนหัวฟอร์มและโลโก้ (ปรับให้จัดวางแนวตั้งและอยู่กึ่งกลาง) */
+.logo-container {
+    display: flex;
+    flex-direction: column; /* จัดองค์ประกอบเป็นแนวตั้ง */
+    align-items: center;    /* จัดให้อยู่กึ่งกลาง */
+    gap: 15px;
     margin-bottom: 30px;
-    font-weight: 400;
 }
 
-/* ส่วนครอบคลุมช่องกรอกข้อมูล */
-.input-label {
-    text-align: left;
-    display: block;
+/* ปรับขนาดโลโก้ให้ใหญ่ขึ้น */
+.logo-container img {
+    width: 90px;            /* เพิ่มขนาดจาก 65px เป็น 90px */
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08)); /* เพิ่มมิติให้ตัวโลโก้ */
+}
+
+/* จัดข้อความให้อยู่กึ่งกลาง */
+.logo-text {
+    text-align: center;
+}
+
+.logo-text h2 {
+    color: var(--primary-green);
+    font-size: 24px;        /* ปรับใหญ่ขึ้นเล็กน้อยให้รับกับโลโก้ */
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.logo-text .subtitle {
     font-size: 13.5px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* ส่วนของฟอร์มกรอกข้อมูล */
+.input-label {
+    display: block;
+    font-size: 14px;
     color: var(--text-dark);
     margin-bottom: 6px;
     font-weight: 500;
@@ -107,29 +162,28 @@ h2 {
 
 .input-group {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .input-group input {
     width: 100%;
     padding: 14px 45px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
     outline: none;
     font-size: 15px;
     color: var(--text-dark);
-    background: rgba(255, 255, 255, 0.75);
+    background: #fdfdfd;
     transition: all 0.3s ease;
 }
 
-/* เอฟเฟกต์เรืองแสงเมื่อคลิกเลือกช่องกรอก */
 .input-group input:focus {
     border-color: var(--primary-green);
     background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(0, 122, 72, 0.15);
+    box-shadow: 0 0 0 4px rgba(0, 122, 72, 0.12);
 }
 
-/* จัดตำแหน่งไอคอนภายในช่องกรอก */
+/* ไอคอนในช่องกรอก */
 .input-group i {
     position: absolute;
     top: 50%;
@@ -139,17 +193,16 @@ h2 {
 
 .input-group i.left {
     left: 16px;
-    color: #888;
+    color: #94a3b8;
 }
 
-/* เปลี่ยนสีไอคอนด้านซ้ายเมื่อผู้ใช้กำลังพิมพ์ */
 .input-group input:focus ~ i.left {
     color: var(--primary-green);
 }
 
 .input-group i.right {
     right: 16px;
-    color: #aaa;
+    color: #94a3b8;
     cursor: pointer;
 }
 
@@ -157,26 +210,26 @@ h2 {
     color: var(--primary-green);
 }
 
-/* ปุ่มกดสไตล์หรูหรา ไล่เฉดสี */
+/* ปุ่มเข้าสู่ระบบ */
 button {
     width: 100%;
     padding: 14px;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
     color: white;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0, 122, 72, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 122, 72, 0.2);
     transition: all 0.3s ease;
-    margin-top: 15px; /* ปรับระยะห่างด้านบนเพิ่มเล็กน้อยแทนจุดที่ลบไป */
+    margin-top: 10px;
 }
 
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(0, 122, 72, 0.4);
-    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 122, 72, 0.3);
+    filter: brightness(1.05);
 }
 
 button:active {
@@ -186,47 +239,93 @@ button:active {
 /* กล่องแสดงข้อความเตือนความผิดพลาด */
 #error {
     margin-top: 15px;
-    color: #d32f2f;
+    color: #df2c2c;
     font-size: 13.5px;
     min-height: 20px;
     font-weight: 500;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+    from { transform: translateX(-40px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInRight {
+    from { transform: translateX(40px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Responsive สำหรับหน้าจอมือถือ */
+@media (max-width: 900px) {
+    .left-side {
+        display: none;
+    }
+    .right-side {
+        flex: 1;
+        background: var(--bg-gov-light);
+    }
+    .login-box {
+        box-shadow: 0 10px 25px rgba(0, 56, 33, 0.05);
+    }
 }
 </style>
 </head>
-
 <body>
 
-<div class="login-box">
-    <div class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" alt="โลโก้กรมธนารักษ์">
+<div class="split-container">
+    
+    <div class="left-side">
+        <div class="welcome-content">
+            <h1>
+                ระบบสืบค้นราคาประเมินที่ราชพัสดุ <br>
+                <span class="keep-together">(กรณีที่ไม่มีเอกสารสิทธิ์)</span> 
+                <span style="color: var(--accent-gold);" class="keep-together">สำนักงานธนารักษ์พื้นที่จังหวัดจันทบุรี</span>
+            </h1>
+            
+            <p>
+                ยินดีต้อนรับเข้าสู่ระบบสืบค้นราคาประเมินที่ราชพัสดุ (กรณีที่ไม่มีเอกสารสิทธิ์) อย่างเป็นทางการ <br>
+                กรุณาเข้าสู่ระบบด้วยบัญชีผู้ใช้ของท่านเพื่อใช้งานระบบ
+            </p>
+        </div>
     </div>
 
-    <h2>เข้าสู่ระบบ</h2>
-    <div class="subtitle">ระบบสืบค้นราคาประเมินที่ราชพัสดุ</div>
+    <div class="right-side">
+        <div class="login-box">
+            
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" alt="โลโก้กรมธนารักษ์">
+                <div class="logo-text">
+                    <h2>เข้าสู่ระบบ</h2>
+                    <div class="subtitle">ระบบสืบค้นราคาประเมินที่ราชพัสดุ</div>
+                </div>
+            </div>
 
-    <label class="input-label" for="username">ชื่อผู้ใช้งาน</label>
-    <div class="input-group">
-        <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้งาน" onkeyup="checkEnter(event)">
-        <i class="fa fa-user left"></i>
+            <label class="input-label" for="username">ชื่อผู้ใช้งาน</label>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้งาน" onkeyup="checkEnter(event)">
+                <i class="fa fa-user left"></i>
+            </div>
+
+            <label class="input-label" for="password">รหัสผ่าน</label>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="กรอกรหัสผ่าน" onkeyup="checkEnter(event)">
+                <i class="fa fa-lock left"></i>
+                <i class="fa fa-eye right" id="toggleIcon" onclick="togglePass()"></i>
+            </div>
+
+            <button onclick="login()">เข้าสู่ระบบ</button>
+
+            <div id="error"></div>
+        </div>
     </div>
 
-    <label class="input-label" for="password">รหัสผ่าน</label>
-    <div class="input-group">
-        <input type="password" id="password" placeholder="กรอกรหัสผ่าน" onkeyup="checkEnter(event)">
-        <i class="fa fa-lock left"></i>
-        <i class="fa fa-eye right" id="toggleIcon" onclick="togglePass()"></i>
-    </div>
-
-    <button onclick="login()">เข้าสู่ระบบ</button>
-
-    <div id="error"></div>
 </div>
 
 <script>
-// ข้อมูลผู้ใช้จำลองสำหรับตรวจสอบ
 const users = [{username: "admin", password: "1234"}];
 
-// ฟังก์ชันสำหรับเข้าสู่ระบบ
 function login() {
     const u = document.getElementById("username").value;
     const p = document.getElementById("password").value;
@@ -238,12 +337,10 @@ function login() {
         sessionStorage.setItem("login", "true");
         window.location.href = "home.html";
     } else {
-        // เพิ่มไอคอนแจ้งเตือนสีแดงหน้าข้อความผิดพลาด
         error.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
     }
 }
 
-// ฟังก์ชันเปิด-ซ่อนรหัสผ่าน และสลับไอคอนดวงตา
 function togglePass() {
     const pass = document.getElementById("password");
     const icon = document.getElementById("toggleIcon");
@@ -259,7 +356,6 @@ function togglePass() {
     }
 }
 
-// ฟังก์ชันตรวจจับการกดปุ่ม Enter บนแป้นพิมพ์เพื่อความสะดวกในการพิมพ์ล็อกอิน
 function checkEnter(event) {
     if (event.key === "Enter") {
         login();
