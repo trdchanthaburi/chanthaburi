@@ -1,228 +1,393 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="SghRc2vc080TaM2lymepxR3xfwlxapeBpJSwht8pHog" />
-    <title>หน้าแรก - ระบบข้อมูลที่ราชพัสดุ</title>
-    <meta name="description" content="ค้นหาราคาประเมินที่ราชพัสดุสำนักงานธนารักษ์พื้นที่จันทบุรี">
-    
-    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เข้าสู่ระบบ - ระบบข้อมูลที่ราชพัสดุ</title>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CN2CDEGJLV"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-CN2CDEGJLV');
-    </script>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script>
-       // ใส่ค่า URL และ Anon Key จริงให้ตรงกับหน้า index.html
-       const SUPABASE_URL = 'https://djwbivzphkhojzwvuasv.supabase.co'; 
-       const SUPABASE_ANON_KEY = 'sb_publishable_hUg6YUAVnNlFjv55Dt-v2A_trlPB8F2';
-       
-       // แก้ไขการประกาศเพื่อไม่ให้ชื่อตัวแปรชนกันตอนสร้าง Client
-       const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+<style>
+:root {
+    --primary-green: #007A48;
+    --dark-green: #005c36;
+    --accent-gold: #D4AF37;
+    --text-dark: #2c3e50;
+    --bg-gov-light: #f1f7f4; 
+}
 
-       // ฟังก์ชันเช็กสิทธิ์ล็อกอิน
-       async function checkAuth() {
-           const { data: { session } } = await supabaseClient.auth.getSession();
-           if (!session) {
-               // ถ้าไม่มี session ให้กลับไปหน้าล็อกอิน
-               window.location.href = "index.html";
-           }
-       }
-       // รันตรวจสอบทันที
-       checkAuth();
-    </script>
-        
-    <style>
-        :root {
-            --primary-green: #008000;
-            --bg-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+}
 
-        body {
-            font-family: 'Prompt', sans-serif;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: var(--bg-image);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+body {
+    height: 100vh;
+    display: flex;
+    background-color: var(--bg-gov-light);
+    overflow: hidden;
+}
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 77, 0, 0.45);
-            z-index: 0;
-        }
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
 
-        .menu-container {
-            position: relative;
-            z-index: 1;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-        }
+.left-side {
+    flex: 1.2;
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 56, 33, 0.85), rgba(0, 122, 72, 0.65)), 
+                url('https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    color: white;
+}
 
-        .logo { 
-            height: 110px; 
-            margin-bottom: 15px; 
-        }
-        
-        h1 { 
-            color: var(--primary-green); 
-            font-size: 1.5rem; 
-            margin: 5px 0; 
-            line-height: 1.4; 
-        }
-        
-        p.subtitle { 
-            color: #444; 
-            margin-bottom: 30px; 
-        }
+.left-side::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.15), transparent 60%);
+    pointer-events: none;
+}
 
-        .button-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px; 
+    animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-        .nav-card {
-            background-color: white;
-            border: 2px solid var(--primary-green);
-            color: var(--primary-green);
-            text-decoration: none;
-            padding: 25px 15px;
-            border-radius: 18px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
+.welcome-content h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
 
-        .nav-card:hover {
-            background-color: var(--primary-green);
-            color: white;
-            transform: translateY(-5px);
-        }
+.keep-together {
+    display: inline-block;
+    white-space: nowrap;
+}
 
-        .logout-btn {
-            margin-top: 25px;
-            padding: 10px 24px;
-            border: none;
-            border-radius: 10px;
-            background: #cc0000;
-            color: white;
-            cursor: pointer;
-            font-family: 'Prompt', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: background 0.2s ease;
-        }
+.welcome-content p {
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.95;
+    line-height: 1.8; 
+    text-align: justify;
+}
 
-        .logout-btn:hover {
-            background: #990000;
-        }
+.right-side {
+    flex: 1;
+    background: var(--bg-gov-light); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.03);
+}
 
-        .fixed-counter {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            text-align: center;
-            border: 1px solid var(--primary-green);
-        }
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    background: white; 
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 56, 33, 0.06); 
+    animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-        .counter-label {
-            display: block;
-            font-size: 11px;
-            color: #333;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
+.logo-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    gap: 15px;
+    margin-bottom: 30px;
+}
 
-        .footer-copyright {
-            margin-top: 25px;
-            font-size: 0.8rem;
-            color: #666;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
+.logo-container img {
+    width: 90px;            
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08)); 
+}
 
-        @media (max-width: 500px) {
-            .button-grid { grid-template-columns: 1fr; }
-            .fixed-counter { bottom: 10px; right: 10px; padding: 8px 10px; }
-        }
-    </style>
+.logo-text {
+    text-align: center;
+}
+
+.logo-text h2 {
+    color: var(--primary-green);
+    font-size: 24px;        
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.logo-text .subtitle {
+    font-size: 13.5px;
+    color: #666;
+    margin-top: 4px;
+}
+
+.input-label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 45px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+    color: var(--text-dark);
+    background: #fdfdfd;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-green);
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 122, 72, 0.12);
+}
+
+.input-group i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+
+.input-group i.left {
+    left: 16px;
+    color: #94a3b8;
+}
+
+.input-group input:focus ~ i.left {
+    color: var(--primary-green);
+}
+
+.input-group i.right {
+    right: 16px;
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+.input-group i.right:hover {
+    color: var(--primary-green);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 122, 72, 0.2);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 122, 72, 0.3);
+    filter: brightness(1.05);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#error {
+    margin-top: 15px;
+    color: #df2c2c;
+    font-size: 13.5px;
+    min-height: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+@keyframes fadeInLeft {
+    from { transform: translateX(-40px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInRight {
+    from { transform: translateX(40px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 900px) {
+    .left-side {
+        display: none;
+    }
+    .right-side {
+        flex: 1;
+        background: var(--bg-gov-light);
+    }
+    .login-box {
+        box-shadow: 0 10px 25px rgba(0, 56, 33, 0.05);
+    }
+}
+</style>
 </head>
 <body>
 
-    <div class="menu-container">
-        <img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" alt="Logo" class="logo">
-        <h1>ระบบสืบค้นราคาประเมินที่ราชพัสดุ</h1>
-        <h1>(กรณีที่ไม่มีเอกสารสิทธิ์)</h1>
-        <p class="subtitle">สำนักงานธนารักษ์พื้นที่จันทบุรี</p>
-        
-        <div class="button-grid">
-            <a href="data-2566-2569.html" class="nav-card">
-                <i class="fas fa-map-marked-alt fa-2x"></i>
-                <span>รอบบัญชี 2566-2569</span>
-            </a>
-            <a href="data-2570-2573.html" class="nav-card">
-                <i class="fas fa-map-marked-alt fa-2x"></i>
-                <span>รอบบัญชี 2570-2573</span>
-            </a>
-        </div>
-
-        <button onclick="logout()" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
-        </button>
-
-        <div class="footer-copyright">
-            &copy; 2026 สำนักงานธนารักษ์พื้นที่จันทบุรี
+<div class="split-container">
+    
+    <div class="left-side">
+        <div class="welcome-content">
+            <h1>
+                ระบบสืบค้นราคาประเมินที่ราชพัสดu <br>
+                <span class="keep-together">(กรณีที่ไม่มีเอกสารสิทธิ์)</span> 
+                <span style="color: var(--accent-gold);" class="keep-together">สำนักงานธนารักษ์พื้นที่จังหวัดจันทบุรี</span>
+            </h1>
+            
+            <p>
+                ยินดีต้อนรับเข้าสู่ระบบสืบค้นราคาประเมินที่ราชพัสดุ (กรณีที่ไม่มีเอกสารสิทธิ์) อย่างเป็นทางการ <br>
+                กรุณาเข้าสู่ระบบด้วยบัญชีผู้ใช้ของท่านเพื่อใช้งานระบบ
+            </p>
         </div>
     </div>
 
-    <div class="fixed-counter">
-        <span class="counter-label"><i class="fas fa-eye"></i> จำนวนผู้เข้าใช้งาน </span>
-        <div id="sfcy6h4xalq6tlejck6tlatbtrqe8dd1y51"></div>
-        <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=y6h4xalq6tlejck6tlatbtrqe8dd1y51&down=async" async></script>
-        <noscript>
-            <a href="https://www.freecounterstat.com" title="web hit counter">
-                <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=y6h4xalq6tlejck6tlatbtrqe8dd1y51" border="0" title="web hit counter" alt="web hit counter">
-            </a>
-        </noscript>
+    <div class="right-side">
+        <div class="login-box">
+            
+            <div class="logo-container">
+                <img src="https://upload.wikimedia.org/wikipedia/th/8/81/The_Treasury_Department_Logo.png" alt="โลโก้กรมธนารักษ์">
+                <div class="logo-text">
+                    <h2>เข้าสู่ระบบ</h2>
+                    <div class="subtitle">ระบบสืบค้นราคาประเมินที่ราชพัสดุ</div>
+                </div>
+            </div>
+
+            <label class="input-label" for="email">อีเมลผู้ใช้งาน</label>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="ตัวอย่าง: admin@domain.com" onkeyup="checkEnter(event)" oninput="clearError()">
+                <i class="fa fa-envelope left"></i>
+            </div>
+
+            <label class="input-label" for="password">รหัสผ่าน</label>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="กรอกรหัสผ่าน" onkeyup="checkEnter(event)" oninput="clearError()">
+                <i class="fa fa-lock left"></i>
+                <i class="fa fa-eye right" id="toggleIcon" onclick="togglePass()"></i>
+            </div>
+
+            <button id="loginBtn" onclick="login()">เข้าสู่ระบบ</button>
+
+            <div id="error"></div>
+        </div>
     </div>
 
-    <script>
-        async function logout() {
-            // สั่ง Logout ผ่าน Client ที่ตั้งชื่อใหม่
-            await supabaseClient.auth.signOut();
-            window.location.href = "index.html";
+</div>
+
+<script>
+const SUPABASE_URL = 'https://djwbivzphkhojzwvuasv.supabase.co'; 
+const SUPABASE_ANON_KEY = 'sb_publishable_hUg6YUAVnNlFjv55Dt-v2A_trlPB8F2';
+
+// ปรับให้ใช้ชื่อตัวแปรเดียวกันเพื่อป้องกันการชนกันของคำสั่งสคริปต์
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function login() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const error = document.getElementById("error");
+    const loginBtn = document.getElementById("loginBtn");
+
+    if (!email || !password) {
+        error.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> กรุณากรอกอีเมลและรหัสผ่านให้ครบถ้วน";
+        return;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.innerText = "กำลังตรวจสอบข้อมูล...";
+    error.innerHTML = "";
+
+    try {
+        const { data, error: authError } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
+
+        if (authError) {
+            error.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i> ${getThaiErrorMessage(authError.message)}`;
+        } else {
+            window.location.href = "home.html"; 
         }
-    </script>
+    } catch (err) {
+        error.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> เกิดข้อผิดพลาดในการเชื่อมต่อระบบเครือข่าย";
+    } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerText = "เข้าสู่ระบบ";
+    }
+}
+
+function getThaiErrorMessage(message) {
+    if (message.includes("Invalid login credentials")) {
+        return "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
+    }
+    if (message.includes("Email not confirmed")) {
+        return "อีเมลนี้ยังไม่ได้รับการยืนยันการใช้งาน";
+    }
+    return "ไม่สามารถเข้าสู่ระบบได้: " + message;
+}
+
+function togglePass() {
+    const pass = document.getElementById("password");
+    const icon = document.getElementById("toggleIcon");
+    
+    if (pass.type === "password") {
+        pass.type = "text";
+        icon.className = "fa-solid fa-eye-slash right"; 
+    } else {
+        pass.type = "password";
+        icon.className = "fa-solid fa-eye right";
+    }
+}
+
+function checkEnter(event) {
+    if (event.key === "Enter") {
+        login();
+    }
+}
+
+function clearError() {
+    document.getElementById("error").innerHTML = "";
+}
+</script>
 
 </body>
 </html>
