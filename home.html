@@ -19,10 +19,26 @@
       gtag('config', 'G-CN2CDEGJLV');
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
-       if (sessionStorage.getItem("login") !== "true") {
-		   window.location.href = "index.html";
-		}
+       // ใส่ค่า URL และ Anon Key จริงให้ตรงกับหน้า index.html
+       const SUPABASE_URL = 'https://djwbivzphkhojzwvuasv.supabase.co'; 
+       const SUPABASE_ANON_KEY = 'sb_publishable_hUg6YUAVnNlFjv55Dt-v2A_trlPB8F2';
+       
+       // แก้ไขการประกาศเพื่อไม่ให้ชื่อตัวแปรชนกันตอนสร้าง Client
+       const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+       // ฟังก์ชันเช็กสิทธิ์ล็อกอิน
+       async function checkAuth() {
+           const { data: { session } } = await supabaseClient.auth.getSession();
+           if (!session) {
+               // ถ้าไม่มี session ให้กลับไปหน้าล็อกอิน
+               window.location.href = "index.html";
+           }
+       }
+       // รันตรวจสอบทันที
+       checkAuth();
     </script>
         
     <style>
@@ -52,7 +68,6 @@
             z-index: 0;
         }
 
-        /* เมนูหลักกลางหน้าจอ */
         .menu-container {
             position: relative;
             z-index: 1;
@@ -109,7 +124,6 @@
             transform: translateY(-5px);
         }
 
-        /* ปุ่มออกจากระบบ */
         .logout-btn {
             margin-top: 25px;
             padding: 10px 24px;
@@ -128,7 +142,6 @@
             background: #990000;
         }
 
-        /* กล่องนับเลขที่มุมขวาล่าง */
         .fixed-counter {
             position: fixed;
             bottom: 20px;
@@ -204,10 +217,11 @@
     </div>
 
     <script>
-        function logout() {
-			sessionStorage.removeItem("login");
-			window.location.href = "index.html";
-		}
+        async function logout() {
+            // สั่ง Logout ผ่าน Client ที่ตั้งชื่อใหม่
+            await supabaseClient.auth.signOut();
+            window.location.href = "index.html";
+        }
     </script>
 
 </body>
